@@ -54,6 +54,13 @@ struct Vector : public Matrix<1, size>
 			minMag = max(minMag, 0);
 			maxMag = max(maxMag, 0);
 			
+			if(minMag > maxMag)
+			{
+				float f = minMag;
+				minMag = maxMag;
+				maxMag = f;
+			}
+			
 			float mag = Magnitude();
 			if(mag > 0)
 			{
