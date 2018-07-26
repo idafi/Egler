@@ -10,6 +10,8 @@ template<int size>
 struct Vector : public Matrix<1, size>
 {
 	public:
+		static constexpr int Size = size;
+
 		Vector<size>() : Matrix<1, size>() { }
 		Vector<size>(const Matrix<1, size>& m) : Matrix<1, size>(m) { }
 	

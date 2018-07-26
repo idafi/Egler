@@ -10,24 +10,26 @@ template<int columns, int rows>
 struct Matrix
 {
 	public:
+		static constexpr int Size = columns * rows;
+
 		Matrix()
 		{
-			memset(c, 0, size * sizeof(float));
+			memset(c, 0, Size * sizeof(float));
 		}
 		
 		Matrix(const Matrix<columns, rows>& m)
 		{
-			memcpy(c, &m, size * sizeof(float));
+			memcpy(c, &m, Size * sizeof(float));
 		}
 
 		bool operator ==(Matrix<columns, rows> m) const
 		{
-			return !memcmp(this->c, m.c, size * sizeof(float));
+			return !memcmp(this->c, m.c, Size * sizeof(float));
 		}
 		
 		bool operator !=(Matrix<columns, rows> m) const
 		{
-			return memcmp(this->c, m.c, size * sizeof(float));
+			return memcmp(this->c, m.c, Size * sizeof(float));
 		}
 		
 		float operator [](int i) const
@@ -45,7 +47,7 @@ struct Matrix
 		Matrix<columns, rows> operator +(Matrix<columns, rows> m) const
 		{
 			Matrix<columns, rows> nMat = *this;
-			for(int i = 0; i < size; i++)
+			for(int i = 0; i < Size; i++)
 			{ nMat.c[i] = this->c[i] + m.c[i]; }
 			
 			return nMat;
@@ -54,7 +56,7 @@ struct Matrix
 		Matrix<columns, rows> operator -(Matrix<columns, rows> m) const
 		{
 			Matrix<columns, rows> nMat = *this;
-			for(int i = 0; i < size; i++)
+			for(int i = 0; i < Size; i++)
 			{ nMat.c[i] = this->c[i] - m.c[i]; }
 		
 			return nMat;
@@ -117,14 +119,12 @@ struct Matrix
 			c[i] = value;
 		}
 		
-		template<int rows>
 		void SetColumn(int column, Matrix<1, rows> values)
 		{
 			int i = GetIndex(column, 0);
 			memcpy(&c[i], values.Data(), sizeof(float) * rows);
 		}
 		
-		template<int columns>
 		void SetRow(int row, Matrix<1, columns> values)
 		{
 			for(int i = 0; i < columns; i++)
@@ -137,12 +137,11 @@ struct Matrix
 		}
 		
 	private:
-		static constexpr int size = columns * rows;
-		float c[size];
+		float c[Size];
 
 		inline void AssertIndex(int i) const
 		{
-			assert(i > -1 && i < size);
+			assert(i > -1 && i < Size);
 		}
 		
 		int GetIndex(int column, int row) const
@@ -159,4 +158,4 @@ struct Mat4 : public Matrix<4, 4>
 	public:
 		Mat4() : Matrix<4, 4>() { }
 		Mat4(const Matrix<4, 4>& m) : Matrix<4, 4>(m) { }
-}
+};
