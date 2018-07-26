@@ -16,3 +16,6 @@
 #define FlagSet(mask, flag) ((mask) |= (flag))
 #define FlagClear(mask, flag) ((mask) &= ~(flag))
 #define FlagTest(mask, flag) (((mask) & (flag)) == (flag))
+
+#include "Matrix.hpp"
+#include "Vector.hpp"
