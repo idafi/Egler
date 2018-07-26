@@ -87,10 +87,10 @@ struct Vector : public Matrix<1, size>
 		Vector<size> Project(Vector<size> v) const
 		{
 			Vector<size> p;
-			float dot = dot(v);
+			float dot = Dot(v);
 			
 			for(int i = 0; i < size; i++)
-			{ p[i] = (dot / v.sqrMagnitude()) * v[i]; }
+			{ p[i] = (dot / v.SqrMagnitude()) * v[i]; }
 			
 			return p;
 		}
