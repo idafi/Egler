@@ -158,4 +158,9 @@ struct Mat4 : public Matrix<4, 4>
 	public:
 		Mat4() : Matrix<4, 4>() { }
 		Mat4(const Matrix<4, 4>& m) : Matrix<4, 4>(m) { }
+
+		Mat4 operator +(Matrix<4, 4>& m) const
+		{
+			return Matrix<4, 4>(*this) + m;
+		}
 };
