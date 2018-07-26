@@ -140,7 +140,7 @@ struct Matrix
 		static constexpr int size = columns * rows;
 		float c[size];
 
-		inline void AssertIndex(int i)
+		inline void AssertIndex(int i) const
 		{
 			assert(i > -1 && i < size);
 		}
