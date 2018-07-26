@@ -1,6 +1,6 @@
 clang++ \
     -target x86_64-pc-windows-gnu \
-    -g -gcodeview \
+    -g \
     -O0 \
     -std=c++17 \
     -Wall \
@@ -11,7 +11,7 @@ clang++ \
 
 clang++ \
     -target x86_64-pc-windows-gnu \
-    -g -gcodeview \
+    -g \
     -O0 \
     -std=c++17 \
     -Wall \
