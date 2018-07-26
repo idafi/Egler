@@ -214,15 +214,22 @@ TEST_F(MatrixTest, TestSetRow)
     ASSERT_FLOAT_EQ(a[13], 8);
 }
 
-TEST_F(MatrixTest, TestFailsOnBadIndex)
+TEST_F(MatrixTest, TestIndexFailsOnBadIndex)
 {
     ASSERT_DEATH(a[-1], ".*");
     ASSERT_DEATH(a[20], ".*");
+}
 
+TEST_F(MatrixTest, TestGetFailsOnBadInput)
+{
     ASSERT_DEATH(a.Get(-1, 0), ".*");
     ASSERT_DEATH(a.Get(0, -1), ".*");
     ASSERT_DEATH(a.Get(20, 0), ".*");
     ASSERT_DEATH(a.Get(0, 20), ".*");
+}
+
+TEST_F(MatrixTest, TestSetFailsOnBadInput)
+{
     ASSERT_DEATH(a.Set(-1, 0, 0), ".*");
     ASSERT_DEATH(a.Set(0, -1, 0), ".*");
     ASSERT_DEATH(a.Set(20, 0, 0), ".*");
