@@ -214,6 +214,13 @@ TEST_F(MatrixTest, TestSetRow)
     ASSERT_FLOAT_EQ(a[13], 8);
 }
 
+TEST_F(MatrixTest, TestGetData)
+{
+    const float *data = a.Data();
+    for(int i = 0; i < Mat4::Size; i++)
+    { ASSERT_FLOAT_EQ(data[i], i); }
+}
+
 TEST_F(MatrixTest, TestIndexFailsOnBadIndex)
 {
     ASSERT_DEATH(a[-1], ".*");
