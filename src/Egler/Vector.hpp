@@ -87,7 +87,7 @@ struct Vector : public Matrix<1, size>
 			Vector<size> p;
 			float dot = dot(v);
 			
-			for(int i = 0; i < cNum; i++)
+			for(int i = 0; i < size; i++)
 			{ p[i] = (dot / v.sqrMagnitude()) * v[i]; }
 			
 			return p;
