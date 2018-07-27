@@ -85,6 +85,15 @@ class Pool
             return false;
         }
 
+        void Clear()
+        {
+            memset(values, 0, sizeof(values));
+
+            freeIndices = std::queue();
+            for(int i = 0; i < size; i++)
+            { freeIndices.push(i); }
+        }
+
     private:
         struct Value
         {

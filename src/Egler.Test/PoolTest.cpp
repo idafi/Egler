@@ -72,3 +72,17 @@ TEST_F(PoolTest, TestIsAllocated)
     pool.Free(ptr);
     ASSERT_FALSE(pool.IsAllocated(ptr));
 }
+
+TEST_F(PoolTest, TestClear)
+{
+    auto ptrA = pool.Allocate();
+    auto ptrB = pool.Allocate();
+    pool[ptrA] = 666;
+    pool[ptrB] = 69;
+
+    pool.Clear();
+
+    ASSERT_EQ(0, pool.Count());
+    ASSERT_FALSE(pool.IsAllocated(ptrA));
+    ASSERT_FALSE(pool.IsAllocated(ptrB));
+}
