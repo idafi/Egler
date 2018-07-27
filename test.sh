@@ -17,8 +17,8 @@ clang++ \
     -Wall \
     -o"bin/Egler.Test.exe" \
     `ls src/Egler.Test/**/*.cpp` \
-    -L"bin" -lEgler.Core \
-    -lgtest_main -lgmock_main -lgtest -lgmock
+    -lgtest_main -lgtest -lgmock \
+    -L"bin" -lEgler.Core
 
 if [ $? -eq 0 ]; then
     echo "Done."
