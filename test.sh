@@ -10,7 +10,7 @@ clang++ \
     -Wall \
     -o"bin/Egler.Test.exe" \
     `ls src/Egler.Test/**/*.cpp` \
-    -L"bin" -lEgler \
+    -L"bin" -lEgler.Core \
     -lgtest_main -lgmock_main -lgtest -lgmock
 
 if [ $? -eq 0 ]; then
