@@ -19,10 +19,10 @@ typedef uint64_t ulong;
 
 #define M_PI 3.14159265358979323846
 
-#define min(a, b) (((a) < (b)) ? (a) : (b))
-#define max(a, b) (((a) > (b)) ? (a) : (b))
-#define Clamp(value, lower, upper) (min(max((value), (lower)), (upper)))
-#define randf() ((float)(rand()) / (float)(RAND_MAX))
+#define Min(a, b) (((a) < (b)) ? (a) : (b))
+#define Max(a, b) (((a) > (b)) ? (a) : (b))
+#define Clamp(value, lower, upper) (Min(Max((value), (lower)), (upper)))
+#define RandF() ((float)(rand()) / (float)(RAND_MAX))
 
 #define FlagSet(mask, flag) ((mask) |= (flag))
 #define FlagClear(mask, flag) ((mask) &= ~(flag))
