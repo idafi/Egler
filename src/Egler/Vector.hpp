@@ -98,8 +98,6 @@ struct Vector : public Matrix<1, size>
 		
 		static Vector<size> Lerp(Vector<size> a, Vector<size> b, float t)
 		{
-			t = Clamp(t, 0, 1);
-			
 			Vector<size> v = b - a;
 			v *= t;
 			
