@@ -5,14 +5,14 @@
 int main(int argc, char **argv)
 {
     ConsoleLogger *logger = new ConsoleLogger();
+    FileLogger *file = new FileLogger("log.txt");
+    Log::AddDefaultLogger(file, LogLevel::Debug);
     Log::AddDefaultLogger(logger, LogLevel::Debug);
 
     SDL_Init(SDL_INIT_VIDEO);
 
     PixelRect rect(SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480);
     Window *window = new Window("Egler", rect);
-
-    LogNote("hello !!");
 
     while(!SDL_QuitRequested())
     {
@@ -26,7 +26,9 @@ int main(int argc, char **argv)
     delete window;
     SDL_Quit();
 
+    Log::RemoveDefaultLogger(file);
     Log::RemoveDefaultLogger(logger);
+    delete file;
     delete logger;
     
     return 0;
