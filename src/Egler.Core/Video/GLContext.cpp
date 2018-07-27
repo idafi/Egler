@@ -1,33 +1,36 @@
 #include "Video.hpp"
 
-GLContext::GLContext(const char * const windowName, const PixelRect& windowDim)
+GLContext::GLContext()
 {
-    window = new GLWindow(windowName, windowDim);
-    models = new ModelPool();
+}
+
+GLContext::GLContext(const char * const windowName, const PixelRect& windowDim)
+: window(GLWindow(windowName, windowDim))
+{
 }
 
 GLContext::~GLContext()
 {
-    delete models;
-    delete window;
+    models.~ModelPool();
+    window.~GLWindow();
 }
 
 GLWindow& GLContext::Window()
 {
-    return *window;
+    return window;
 }
 
 ModelPool& GLContext::Models()
 {
-    return *models;
+    return models;
 }
 
 bool GLContext::IsCurrent()
 {
-    return window->IsCurrent();
+    return window.IsCurrent();
 }
 
 void GLContext::MakeCurrent()
 {
-    window->MakeCurrent();
+    window.MakeCurrent();
 }

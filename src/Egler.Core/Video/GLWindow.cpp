@@ -1,9 +1,8 @@
 #include "Video.hpp"
 
 GLWindow::GLWindow()
+: GLWindow("Egler", PixelRect(SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480))
 {
-    window = nullptr;
-    context = nullptr;
 }
 
 GLWindow::GLWindow(const char * const name, const PixelRect& dimensions)

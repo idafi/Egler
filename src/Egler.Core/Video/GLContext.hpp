@@ -5,6 +5,7 @@
 class GLContext
 {
     public:
+        GLContext();
         GLContext(const char * const windowName, const PixelRect& windowDim);
         ~GLContext();
 
@@ -15,6 +16,6 @@ class GLContext
         void MakeCurrent();
 
     private:
-        GLWindow *window;
-        ModelPool *models;
+        GLWindow window;
+        ModelPool models;
 };
