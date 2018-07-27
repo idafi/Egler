@@ -1,8 +1,14 @@
-#include "Window.hpp"
+#include "Video.hpp"
 
-Window::Window(char const * const name, const PixelRect& dimensions)
+GLWindow::GLWindow()
 {
-    assert(name);
+    window = nullptr;
+    context = nullptr;
+}
+
+GLWindow::GLWindow(const char * const name, const PixelRect& dimensions)
+{
+	assert(name);
     assert(dimensions.Width > -1);
     assert(dimensions.Height > -1);
 
@@ -34,28 +40,39 @@ Window::Window(char const * const name, const PixelRect& dimensions)
     glViewport(0, 0, dimensions.Width, dimensions.Height);
 }
 
-Window::~Window()
+GLWindow::~GLWindow()
 {
     SDL_GL_DeleteContext(context);
     SDL_DestroyWindow(window);
+	
+	context = nullptr;
+	window = nullptr;
 }
 
-void Window::Clear(const Vector4& color, const float depth)
+void GLWindow::Clear(const Vector4& color, const float depth)
 {
-    EnsureCurrent();
-
+	assert(IsCurrent());
+	
     glClearColor(color[0], color[1], color[2], color[3]);
     glClearDepth(depth);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void Window::Present()
+void GLWindow::Present()
 {
+	assert(IsCurrent());
+	
     SDL_GL_SwapWindow(window);
 }
 
-void Window::EnsureCurrent()
+void GLWindow::MakeCurrent()
 {
-    if(SDL_GL_GetCurrentContext() != context)
-    { SDL_GL_MakeCurrent(window, context); }
+	if(!IsCurrent())
+	{ SDL_GL_MakeCurrent(window, context); }
+}
+
+bool GLWindow::IsCurrent()
+{
+	SDL_GLContext current = SDL_GL_GetCurrentContext();
+	return (current != nullptr && current == context);
 }
