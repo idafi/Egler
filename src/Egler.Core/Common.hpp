@@ -9,6 +9,7 @@
 #include <cstdlib>
 #include <cstdio>
 #include <cstring>
+#include <memory>
 
 #define intern static
 typedef int8_t sbyte;

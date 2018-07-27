@@ -6,7 +6,7 @@ ModelPool::ModelPool()
 	glGenBuffers(maxVBOs, vbos);
 	glGenBuffers(maxIBOs, ibos);
 	
-	Model *modelArray = new Model[MaxModels];
+	std::unique_ptr<Model[]> initModels(new Model[MaxModels]);
 	for(int i = 0; i < MaxModels; i++)
 	{
 		VertexArray vao = vaos[i];
@@ -14,11 +14,10 @@ ModelPool::ModelPool()
 		VertexBuffer vbo_col = vbos[(i * 2) + 1];
 		IndexBuffer ibo = ibos[i];
 
-		modelArray[i] = Model(vao, vbo_pos, vbo_col, ibo);
+		initModels[i] = Model(vao, vbo_pos, vbo_col, ibo);
 	}
 
-	models = Pool<Model, MaxModels>(modelArray, MaxModels);	
-	delete[] modelArray;
+	models = Pool<Model, MaxModels>(initModels.get(), MaxModels);	
 }
 
 ModelPool::~ModelPool()
