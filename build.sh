@@ -1,6 +1,7 @@
 shopt -s globstar
 
 clang++ \
+    -mwindows \
     -target x86_64-pc-windows-gnu \
     -g \
     -O0 \
