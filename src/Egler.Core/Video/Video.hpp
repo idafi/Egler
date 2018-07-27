@@ -7,9 +7,9 @@
 #include <GL/glew.h>
 #include "../Core.hpp"
 
-typedef GLuint vertex_array;
-typedef GLuint vertex_buffer;
-typedef GLuint index_buffer;
+typedef GLuint VertexArray;
+typedef GLuint VertexBuffer;
+typedef GLuint IndexBuffer;
 
 #include "PixelRect.hpp"
 #include "ModelBuffer.hpp"

@@ -15,9 +15,9 @@ class ModelPool
         static constexpr int maxVBOs = MaxModels * 2;
         static constexpr int maxIBOs = MaxModels;
 		
-		vertex_array vaos[maxVAOs];
-        vertex_buffer vbos[maxVBOs];
-        index_buffer ibos[maxIBOs];
+		VertexArray vaos[maxVAOs];
+        VertexBuffer vbos[maxVBOs];
+        IndexBuffer ibos[maxIBOs];
 		
 		Pool<Model, MaxModels> models;
 };

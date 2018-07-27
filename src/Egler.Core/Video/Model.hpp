@@ -12,15 +12,15 @@ class Model
 
     public:
         Model();
-        Model(vertex_array vao, vertex_buffer vbo_pos, vertex_buffer vbo_col, index_buffer ibo);
+        Model(VertexArray vao, VertexBuffer vbo_pos, VertexBuffer vbo_col, IndexBuffer ibo);
 
         void SetData(const ModelBuffer& buffer);
 
     private:
-        vertex_array vao;
-        vertex_buffer vbo_pos;
-        vertex_buffer vbo_col;
-        index_buffer ibo;
+        VertexArray vao;
+        VertexBuffer vbo_pos;
+        VertexBuffer vbo_col;
+        IndexBuffer ibo;
         
         int indexCount;
 };

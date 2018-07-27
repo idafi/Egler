@@ -5,7 +5,7 @@ Model::Model()
     vao = vbo_pos = vbo_col = ibo = 0;
 }
 
-Model::Model(vertex_array vao, vertex_buffer vbo_pos, vertex_buffer vbo_col, index_buffer ibo)
+Model::Model(VertexArray vao, VertexBuffer vbo_pos, VertexBuffer vbo_col, IndexBuffer ibo)
 : vao(vao), vbo_pos(vbo_pos), vbo_col(vbo_col), ibo(ibo) { }
 
 void Model::SetData(const ModelBuffer& buffer)
