@@ -23,6 +23,16 @@ class Pool
             memset(values, 0, sizeof(values));
         }
 
+        Pool(const T * const initValues, const int initValueCount) : Pool()
+        {
+            assert(initValues);
+            assert(initValueCount > -1);
+            assert(initValueCount <= size);
+
+            for(int i = 0; i < initValueCount; i++)
+            { values[i].Item = initValues[i]; }
+        }
+
         T& operator [](const Ptr& ptr)
         {
             assert(IsAllocated(ptr));

@@ -6,6 +6,18 @@ class PoolTest : public testing::Test
         Pool<int, 5> pool;
 };
 
+TEST_F(PoolTest, TestCtorWithExistingValues)
+{
+    int values[3] = { 2, 4, 6 };
+    auto p = Pool<int, 5>(values, 3);
+
+    ASSERT_EQ(2, p[p.Allocate()]);
+    ASSERT_EQ(4, p[p.Allocate()]);
+    ASSERT_EQ(6, p[p.Allocate()]);
+    ASSERT_EQ(0, p[p.Allocate()]);
+    ASSERT_EQ(0, p[p.Allocate()]);
+}
+
 TEST_F(PoolTest, TestAllocate)
 {
     auto ptr = pool.Allocate();
