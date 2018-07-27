@@ -66,7 +66,6 @@ void Log::Write(const LogLevel level, char const * const msg, ...)
 	va_end(args);
 }
 
-std::string Log::GetTimestamp()
 {
 	using namespace std::chrono;
 	
@@ -77,13 +76,7 @@ std::string Log::GetTimestamp()
 	time_t time = system_clock::to_time_t(tp);
 	struct tm local;
 	localtime_s(&local, &time);
-	
-	char prefix[9];
-	char out[13];
-	strftime(prefix, 9, "%H:%M:%S", &local);
-	snprintf(out, 13, "%s.%03u", prefix, msRem);
 
-	return std::string(out);
 }
 
 void Log::Write(const LogLevel level, char const * const msg, va_list args)
@@ -92,19 +85,12 @@ void Log::Write(const LogLevel level, char const * const msg, va_list args)
 	
 	if(loggers.size() > 0)
 	{
-		std::string str = GetTimestamp();
-		str += ": ";
 
-		char fmtMsg[512];
-		vsnprintf(fmtMsg, 512, msg, args);
-
-		str += fmtMsg;
 
 		for(auto pair : loggers)
 		{
 			LogLevel loggerMinLevel = loggers[pair.first];
 			if(level >= loggerMinLevel)
-			{ pair.first->Write(level, str.c_str()); }
 		}
 	}
 }

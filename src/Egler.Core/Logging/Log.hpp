@@ -24,7 +24,6 @@ class Log
 		static Log defaultLog;
 		std::map<ILogger * const, LogLevel> loggers;
 		
-		std::string GetTimestamp();
 		void Write(const LogLevel level, char const * const msg, va_list args);
 };
 
