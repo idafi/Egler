@@ -93,13 +93,7 @@ struct Vector : public Matrix<1, size>
 		
 		Vector<size> Project(Vector<size> v) const
 		{
-			Vector<size> p;
-			float dot = Dot(v);
-			
-			for(int i = 0; i < size; i++)
-			{ p[i] = (dot / v.SqrMagnitude()) * v[i]; }
-			
-			return p;
+			return v * (this->Dot(v) / v.Dot(v));
 		}
 		
 		static Vector<size> Lerp(Vector<size> a, Vector<size> b, float t)
