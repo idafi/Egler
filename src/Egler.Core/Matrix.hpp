@@ -4,7 +4,7 @@
 // matrix math - matricies are column-major
 // - - - - - -
 
-#include "Common.hpp"
+#include "Core.hpp"
 
 template<int columns, int rows>
 struct Matrix

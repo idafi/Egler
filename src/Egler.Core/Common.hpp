@@ -30,5 +30,3 @@ typedef uint64_t ulong;
 
 #include "Matrix.hpp"
 #include "Vector.hpp"
-#include "Console.hpp"
-#include "Logging/Logging.hpp"

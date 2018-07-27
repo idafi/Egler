@@ -4,7 +4,7 @@
 // vector math - completely compatible with matrix objects
 // - - - - - -
 
-#include "Common.hpp"
+#include "Core.hpp"
 
 template<int size>
 struct Vector : public Matrix<1, size>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Common.hpp"
+#include "Core.hpp"
 
 // - - - - - -
 // platform-independent console interface

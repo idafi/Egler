@@ -3,7 +3,7 @@
 #include <cstdio>
 #include <stdexcept>
 #include <windows.h>
-#include "Common.hpp"
+#include "Core.hpp"
 
 ushort Console::GetForegroundColor(ConsoleColor color)
 {
