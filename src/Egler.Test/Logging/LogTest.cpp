@@ -76,3 +76,23 @@ TEST_F(LogTest, TestDefaultLogger)
     EXPECT_CALL(logger, Write(testing::_, testing::_)).Times(0);
     Log::WriteToDefault(LogLevel::Warning, msg);
 }
+
+TEST_F(LogTest, TestMacros)
+{
+    Log::AddDefaultLogger(&logger, LogLevel::Debug);
+
+    EXPECT_CALL(logger, Write(LogLevel::Debug, testing::HasSubstr("hello !!")));
+    LogDebug("hello !!");
+
+    EXPECT_CALL(logger, Write(LogLevel::Note, testing::HasSubstr("hello !!")));
+    LogNote("hello !!");
+
+    EXPECT_CALL(logger, Write(LogLevel::Warning, testing::HasSubstr("hello !!")));
+    LogWarning("hello !!");
+
+    EXPECT_CALL(logger, Write(LogLevel::Error, testing::HasSubstr("hello !!")));
+    LogError("hello !!");
+
+    EXPECT_CALL(logger, Write(LogLevel::Failure, testing::HasSubstr("hello !!")));
+    LogFailure("hello !!");
+}
