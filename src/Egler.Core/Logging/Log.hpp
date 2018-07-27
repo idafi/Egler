@@ -6,6 +6,8 @@
 // multi-target logging system
 // - - - - - -
 
+#define MAX_LOG_MSG 512
+
 class Log
 {
 	public:
