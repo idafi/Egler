@@ -2,17 +2,18 @@
 #include "../Egler.Core/Core.hpp"
 #include "../Egler.Core/Video/Video.hpp"
 
+ConsoleLogger consoleLogger;
+FileLogger fileLogger("log.txt");
+
 int main(int argc, char **argv)
 {
-    ConsoleLogger *logger = new ConsoleLogger();
-    FileLogger *file = new FileLogger("log.txt");
-    Log::AddDefaultLogger(file, LogLevel::Debug);
-    Log::AddDefaultLogger(logger, LogLevel::Debug);
+    Log::AddDefaultLogger(&fileLogger, LogLevel::Debug);
+    Log::AddDefaultLogger(&consoleLogger, LogLevel::Debug);
 
     SDL_Init(SDL_INIT_VIDEO);
 
-    PixelRect rect(SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480);
-    GLContext *context = new GLContext("Egler", rect);
+    const PixelRect windowRect(SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480);
+    GLContext *context = new GLContext("Egler", windowRect);
 
     while(!SDL_QuitRequested())
     {
@@ -26,10 +27,8 @@ int main(int argc, char **argv)
     delete context;
     SDL_Quit();
 
-    Log::RemoveDefaultLogger(file);
-    Log::RemoveDefaultLogger(logger);
-    delete file;
-    delete logger;
+    Log::RemoveDefaultLogger(&fileLogger);
+    Log::RemoveDefaultLogger(&consoleLogger);
     
     return 0;
 }
