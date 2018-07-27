@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "${workspaceFolder}/bin/Egler.Test.exe",
             "args": [],
-            "stopAtEntry": true,
+            "stopAtEntry": false,
             "cwd": "${workspaceFolder}/bin",
             "externalConsole": false,
             "MIMode": "gdb",
