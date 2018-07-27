@@ -1,6 +1,13 @@
 shopt -s globstar
 
-echo "Building..."
+echo "Building main code..."
+
+./build.sh
+if [ $? -eq 0 ]; then
+    echo "Done."
+fi
+
+echo "Building tests..."
 
 clang++ \
     -target x86_64-pc-windows-gnu \
