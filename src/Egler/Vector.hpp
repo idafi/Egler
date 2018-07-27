@@ -51,27 +51,20 @@ struct Vector : public Matrix<1, size>
 		
 		Vector<size> ClampMagnitude(float minMag, float maxMag) const
 		{
-			minMag = max(minMag, 0);
-			maxMag = max(maxMag, 0);
-			
-			if(minMag > maxMag)
-			{
-				float f = minMag;
-				minMag = maxMag;
-				maxMag = f;
-			}
-			
+			float min = Max(Min(minMag, maxMag), 0);
+			float max = Max(Max(minMag, maxMag), 0);			
 			float mag = Magnitude();
+
 			if(mag > 0)
 			{
-				if(mag < minMag)
+				if(mag < min)
 				{
-					float s = minMag / mag;
+					float s = min / mag;
 					return (*this * s);
 				}
-				if(mag > maxMag)
+				if(mag > max)
 				{
-					float s = maxMag / mag;
+					float s = max / mag;
 					return (*this * s);
 				}
 			}
