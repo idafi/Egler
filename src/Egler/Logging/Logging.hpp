@@ -12,3 +12,4 @@
 #include "ILogger.hpp"
 #include "Log.hpp"
 #include "ConsoleLogger.hpp"
+#include "FileLogger.hpp"
