@@ -12,18 +12,18 @@ int main(int argc, char **argv)
     SDL_Init(SDL_INIT_VIDEO);
 
     PixelRect rect(SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480);
-    Window *window = new Window("Egler", rect);
+    GLContext *context = new GLContext("Egler", rect);
 
     while(!SDL_QuitRequested())
     {
         Vector4 color(0, 1, 1, 1);
-        window->Clear(color, 1);
-        window->Present();
+        context->Window().Clear(color, 1);
+        context->Window().Present();
         
         SDL_Delay(16);
     }
 
-    delete window;
+    delete context;
     SDL_Quit();
 
     Log::RemoveDefaultLogger(file);
