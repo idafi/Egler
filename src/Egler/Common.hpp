@@ -11,6 +11,11 @@
 #include <cstring>
 
 #define intern static
+typedef int8_t sbyte;
+typedef uint8_t byte;
+typedef uint16_t ushort;
+typedef uint32_t uint;
+typedef uint64_t ulong;
 
 #define M_PI 3.14159265358979323846
 
