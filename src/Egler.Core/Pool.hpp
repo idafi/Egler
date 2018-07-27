@@ -89,7 +89,7 @@ class Pool
         {
             memset(values, 0, sizeof(values));
 
-            freeIndices = std::queue();
+            freeIndices = std::queue<int>();
             for(int i = 0; i < size; i++)
             { freeIndices.push(i); }
         }
