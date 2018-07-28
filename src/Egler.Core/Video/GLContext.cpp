@@ -9,12 +9,6 @@ GLContext::GLContext(const char * const windowName, const PixelRect& windowDim)
 {
 }
 
-GLContext::~GLContext()
-{
-    models.~ModelPool();
-    window.~GLWindow();
-}
-
 GLWindow& GLContext::Window()
 {
     return window;
