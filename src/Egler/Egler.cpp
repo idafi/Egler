@@ -16,9 +16,14 @@ namespace Egler
     {
         Log::AddDefaultLogger(&fileLogger, LogLevel::Debug);
         Log::AddDefaultLogger(&consoleLogger, LogLevel::Debug);
+        LogNote("Logs initialized.");
+
+        LogNote("Initializing SDL...");
 
         if(SDL_Init(SDL_INIT_VIDEO) < 0)
         { throw SDLException("SDL failed to initialize."); }
+        
+        LogNote("...done.");
 
         const PixelRect windowRect(SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480);
         context = new GLContext("Egler", windowRect);
@@ -43,8 +48,11 @@ namespace Egler
         if(context)
         { delete context; }
 
+        LogNote("Shutting down SDL...");
         SDL_Quit();
+        LogNote("...done.");
 
+        LogNote("Flushing and shutting down logs...");
         Log::FlushDefault();
         Log::RemoveDefaultLogger(&fileLogger);
         Log::RemoveDefaultLogger(&consoleLogger);
