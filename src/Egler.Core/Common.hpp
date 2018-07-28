@@ -29,5 +29,7 @@ typedef uint64_t ulong;
 #define FlagClear(mask, flag) ((mask) &= ~(flag))
 #define FlagTest(mask, flag) (((mask) & (flag)) == (flag))
 
+#include "Exceptions.hpp"
+#include "Check.hpp"
 #include "Matrix.hpp"
 #include "Vector.hpp"
