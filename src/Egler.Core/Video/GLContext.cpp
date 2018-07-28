@@ -29,6 +29,11 @@ namespace Egler::Video
         return models;
     }
 
+    MaterialPool& GLContext::Materials()
+    {
+        return materials;
+    }
+
     bool GLContext::IsCurrent()
     {
         return window.IsCurrent();
