@@ -6,7 +6,7 @@
 
 #include <map>
 #include <string>
-#include "../Common.hpp"
+#include "../Core.hpp"
 
 #include "LogLevel.hpp"
 #include "ILogger.hpp"

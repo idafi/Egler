@@ -2,14 +2,13 @@
 #include <cstdarg>
 #include <chrono>
 
-#include "Log.hpp"
+#include "Logging.hpp"
 
 Log Log::defaultLog;
 
 Log::~Log()
 {
 	Flush();
-	loggers.clear();
 }
 
 void Log::AddDefaultLogger(ILogger * const logger, const LogLevel minLevel)

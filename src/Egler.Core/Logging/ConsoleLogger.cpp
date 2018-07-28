@@ -1,4 +1,4 @@
-#include "ConsoleLogger.hpp"
+#include "Logging.hpp"
 
 void ConsoleLogger::Write(const LogLevel level, const char * const msg)
 {
