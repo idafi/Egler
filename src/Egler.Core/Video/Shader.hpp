@@ -66,8 +66,10 @@ namespace Egler::Video
     {
         public:
             Shader();
-            Shader(const ShaderSource& source);
             ~Shader();
+
+            void Compile(const ShaderSource& source);
+            void Use() const;
 
             int GetUniformCount();
             ShaderUniform GetUniform(int index);

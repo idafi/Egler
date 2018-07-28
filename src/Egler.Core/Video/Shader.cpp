@@ -9,7 +9,12 @@ namespace Egler::Video
         program = 0;
     }
 
-    Shader::Shader(const ShaderSource& source)
+    Shader::~Shader()
+    {
+        glDeleteProgram(program);
+    }
+
+    void Shader::Compile(const ShaderSource &source)
     {
         LogDebug("Creating shader...");
 
@@ -25,15 +30,16 @@ namespace Egler::Video
         LogDebug("...done.");
     }
 
-    Shader::~Shader()
+    void Shader::Use() const
     {
-        glDeleteProgram(program);
+        CheckID(program);
+
+        glUseProgram(program);
     }
 
     int Shader::GetUniformCount()
     {
         int ct;
-
         glGetProgramiv(program, GL_ACTIVE_UNIFORMS, &ct);
         return ct;
     }
@@ -42,7 +48,9 @@ namespace Egler::Video
     {
         GLenum type;
         GLchar name[32];
-        glGetActiveUniform(program, index, 32, nullptr, nullptr, &type, name);
+        int len;
+        int lenlen;
+        glGetActiveUniform(program, index, 32, &len, &lenlen, &type, name);
         
         ShaderUniform uniform;
         strcpy(uniform.Name, name);

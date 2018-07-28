@@ -10,7 +10,7 @@ namespace Egler::Video
 
         shaderCount = contextData.ShaderCount;
         for(int i = 0; i < shaderCount; i++)
-        { shaders[i] = Shader(contextData.Shaders[i]); }
+        { shaders[i].Compile(contextData.Shaders[i]); }
     }
 
     Shader& GLContext::GetShader(int index)
