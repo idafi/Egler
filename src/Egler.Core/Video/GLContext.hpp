@@ -25,6 +25,7 @@ namespace Egler::Video
 
             GLWindow& Window();
             ModelPool& Models();
+            MaterialPool& Materials();
 
             bool IsCurrent();
             void MakeCurrent();
