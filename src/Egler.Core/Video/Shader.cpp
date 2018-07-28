@@ -30,6 +30,26 @@ namespace Egler::Video
         glDeleteProgram(program);
     }
 
+    int Shader::GetUniformCount()
+    {
+        int ct;
+
+        glGetProgramiv(program, GL_ACTIVE_UNIFORMS, &ct);
+        return ct;
+    }
+
+    ShaderUniform Shader::GetUniform(int index)
+    {
+        GLenum type;
+        GLchar name[32];
+        glGetActiveUniform(program, index, 32, nullptr, nullptr, &type, name);
+        
+        ShaderUniform uniform;
+        strcpy(uniform.Name, name);
+        uniform.Type = (ShaderUniformType)(type);
+        return uniform;
+    }
+
     void Shader::SetUniform(const char * const name, const float value)
     {
         CheckPtr(name);

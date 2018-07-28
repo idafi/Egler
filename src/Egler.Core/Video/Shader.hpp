@@ -47,12 +47,30 @@ namespace Egler::Video
         }
     };
 
+    enum class ShaderUniformType : GLenum
+    {
+        F1 = GL_FLOAT,
+        F2 = GL_FLOAT_VEC2,
+        F3 = GL_FLOAT_VEC3,
+        F4 = GL_FLOAT_VEC4,
+        M4 = GL_FLOAT_MAT4
+    };
+
+    struct ShaderUniform
+    {
+        char Name[32];
+        ShaderUniformType Type;
+    };
+
     class Shader
     {
         public:
             Shader();
             Shader(const ShaderSource& source);
             ~Shader();
+
+            int GetUniformCount();
+            ShaderUniform GetUniform(int index);
 
             void SetUniform(const char * const name, const float value);
             void SetUniform(const char * const name, const Vector2& value);
