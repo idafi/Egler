@@ -1,6 +1,5 @@
-#include <fstream>
-#include <sstream>
 #include "../Egler.Core/Core/Core.hpp"
+#include "../Egler.Core/IO/IO.hpp"
 #include "../Egler.Core/Logging/Logging.hpp"
 #include "../Egler.Core/Video/Video.hpp"
 
@@ -31,24 +30,11 @@ namespace Egler
         const char * const vertFilename = "data/shader.vert";
         const char * const fragFilename = "data/shader.frag";
 
-        std::ifstream vertFile(vertFilename);
-        std::ifstream fragFile(fragFilename);
-        std::stringstream buffer;
-
-        buffer << vertFile.rdbuf();
-        vertFile.close();
-
-        std::string vertStr = buffer.str();
-        buffer.str("");
+        std::string vertStr = IO::ReadAllText(vertFilename);
+        std::string fragStr = IO::ReadAllText(fragFilename);
+        
         ShaderSourceFile vert(vertStr.c_str(), ShaderType::Vertex, vertFilename);
-
-        buffer << fragFile.rdbuf();
-        fragFile.close();
-
-        std::string fragStr = buffer.str();
-        buffer.str("");
         ShaderSourceFile frag(fragStr.c_str(), ShaderType::Fragment, fragFilename);
-
         ShaderSourceFile files[] = { vert, frag };
         ShaderSource shaders[] =  { ShaderSource(files, 2) };
 
