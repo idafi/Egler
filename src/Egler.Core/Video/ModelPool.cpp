@@ -50,4 +50,37 @@ namespace Egler::Video
 
 		LogNote("...done.");
 	}
+
+    int ModelPool::Capacity()
+    {
+        return models.Capacity();
+    }
+
+    int ModelPool::Count()
+    {
+        return models.Count();
+    }
+
+    ModelPool::Ptr ModelPool::Allocate(const ModelBuffer& dataBuffer)
+    {
+        Ptr ptr = models.Allocate();
+		models[ptr].SetData(dataBuffer);
+
+		return ptr;
+    }
+
+    void ModelPool::Free(const Ptr& ptr)
+    {
+        models.Free(ptr);
+    }
+
+    bool ModelPool::IsAllocated(const Ptr& ptr)
+    {
+        return models.IsAllocated(ptr);
+    }
+
+    void ModelPool::Clear()
+    {
+        models.Clear();
+    }
 }

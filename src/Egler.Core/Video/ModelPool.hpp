@@ -7,8 +7,18 @@ namespace Egler::Video
 	class ModelPool
 	{
 		public:
+			typedef typename Pool<Model, MaxModels>::Ptr Ptr;
+
 			ModelPool();
 			~ModelPool();
+
+            int Capacity();
+            int Count();
+
+            Ptr Allocate(const ModelBuffer& dataBuffer);
+            void Free(const Ptr& ptr);
+            bool IsAllocated(const Ptr& ptr);
+            void Clear();
 		
 		private:
 			static constexpr int maxVAOs = MaxModels;
