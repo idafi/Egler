@@ -8,5 +8,14 @@
 #include "Vector.hpp"
 #include "Pool.hpp"
 
-#define SDLException(msg, ...) \
-    FailureException(msg "\n\tSDL error: %s", ##__VA_ARGS__, SDL_GetError())
+namespace Egler::Core
+{
+    #define SDLException(msg, ...) \
+        FailureException(msg "\n\tSDL error: %s", ##__VA_ARGS__, SDL_GetError())
+    
+    void Init();
+    bool ShouldQuit();
+    void Quit();
+
+    void Delay(uint ms);
+}

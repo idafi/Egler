@@ -20,15 +20,12 @@ namespace Egler
         Log::AddDefaultLogger(&consoleLogger, LogLevel::Debug);
         LogNote("Logs initialized.");
 
-        LogNote("Initializing SDL...");
-
-        if(SDL_Init(SDL_INIT_VIDEO) < 0)
-        { throw SDLException("SDL failed to initialize."); }
-
+        LogNote("Initializing Core...");
+        Core::Init();
         LogNote("...done.");
 
         const char * const windowName = "Egler";
-        const PixelRect windowRect(SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480);
+        const PixelRect windowRect(GLWindow::Centered, GLWindow::Centered, 640, 480);
 
         // build shaders
         const char * const vertFilename = "data/shader.vert";
@@ -61,7 +58,7 @@ namespace Egler
 
     bool ShouldQuit()
     {
-        return SDL_QuitRequested();
+        return Core::ShouldQuit();
     }
 
     void Frame()
@@ -70,7 +67,7 @@ namespace Egler
         context->Window().Clear(color, 1);
         context->Window().Present();
         
-        SDL_Delay(16);
+        Core::Delay(16);
     }
 
     int Quit(const int code)
@@ -78,8 +75,8 @@ namespace Egler
         if(context)
         { delete context; }
 
-        LogNote("Shutting down SDL...");
-        SDL_Quit();
+        LogNote("Shutting down Core...");
+        Core::Quit();
         LogNote("...done.");
 
         LogNote("Flushing and shutting down logs.");

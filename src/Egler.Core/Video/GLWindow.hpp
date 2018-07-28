@@ -7,6 +7,9 @@ namespace Egler::Video
 	class GLWindow
 	{
 		public:
+			// SDL magic
+			static constexpr uint Centered = SDL_WINDOWPOS_CENTERED;
+
 			GLWindow();
 			GLWindow(const char * const name, const PixelRect& dimensions);
 			~GLWindow();
