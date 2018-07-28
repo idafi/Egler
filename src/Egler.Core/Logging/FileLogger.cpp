@@ -2,7 +2,7 @@
 
 FileLogger::FileLogger(const char * const filePath)
 {
-	assert(filePath);
+	CheckPtr(filePath);
 	
 	file.open(filePath);
 }
@@ -14,7 +14,12 @@ FileLogger::~FileLogger()
 
 void FileLogger::Write(LogLevel level, const char * const msg)
 {
-	assert(msg);
+	CheckPtr(msg);
 	
 	file << msg;
+}
+
+void FileLogger::Flush()
+{
+	file.flush();
 }

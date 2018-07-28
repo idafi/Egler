@@ -32,7 +32,7 @@ TEST_F(PoolTest, TestAllocateFailsWhenFull)
     for(int i = 0; i < pool.Capacity(); i++)
     { pool.Allocate(); }
 
-    ASSERT_DEATH(pool.Allocate(), ".*");
+    ASSERT_THROW(pool.Allocate(), InvalidOperationException);
 }
 
 TEST_F(PoolTest, TestReallocateFreed)
@@ -44,7 +44,7 @@ TEST_F(PoolTest, TestReallocateFreed)
     { pool.Free(ptrs[i]); }
 
     for(int i = 0; i < 5; i++)
-    { ASSERT_NO_FATAL_FAILURE(pool.Allocate()); }
+    { ASSERT_NO_THROW(pool.Allocate()); }
 }
 
 TEST_F(PoolTest, TestFree)
@@ -54,14 +54,14 @@ TEST_F(PoolTest, TestFree)
     pool.Free(ptr);
 
     ASSERT_EQ(0, pool.Count());
-    ASSERT_DEATH(pool[ptr], ".*");
+    ASSERT_THROW(pool[ptr], OutOfRangeException);
 }
 
 TEST_F(PoolTest, TestFreeHandlesNotAllocated)
 {
     auto ptr = pool.Allocate();
     pool.Free(ptr);
-    ASSERT_NO_FATAL_FAILURE(pool.Free(ptr));
+    ASSERT_NO_THROW(pool.Free(ptr));
 }
 
 TEST_F(PoolTest, TestIsAllocated)

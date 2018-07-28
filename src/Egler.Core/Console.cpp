@@ -46,7 +46,8 @@ ushort Console::GetBackgroundColor(ConsoleColor color)
 Console::Console()
 {
 	int result = AllocConsole();
-	assert(result);
+	if(result == 0)
+	{ throw FailureException("Failed to allocate Windows console."); }
 	
 	// we need an extant but otherwised-unused file to satisfy freopen_s
 	freopen_s(&dummy, "CONIN$", "r", stdin);
@@ -70,7 +71,7 @@ void Console::SetColor(ConsoleColor foreground, ConsoleColor background)
 
 void Console::Print(const char * const msg)
 {
-	assert(msg);
+	CheckPtr(msg);
 	
 	// we could write directly... or we could make it easy and printf.
 	printf("%s", msg);

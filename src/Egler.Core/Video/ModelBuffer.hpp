@@ -13,8 +13,8 @@ struct ModelBuffer
 
     ModelBuffer(int maxVertices, int maxIndices)
     {
-        assert(maxVertices > -1);
-        assert(maxIndices > -1);
+        CheckSign(maxVertices);
+        CheckSign(maxIndices);
 
         VertexPositions = new float[maxVertices];
         VertexColors = new float[maxVertices];

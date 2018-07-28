@@ -9,6 +9,8 @@
 class ILogger
 {
 	public:
-		virtual ~ILogger() { }		
+		virtual ~ILogger() { }
+
 		virtual void Write(LogLevel level, const char * const msg) = 0;
+		virtual void Flush(){ }
 };

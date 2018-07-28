@@ -1,4 +1,3 @@
-#include <SDL2/SDL.h>
 #include "../Egler.Core/Core.hpp"
 #include "../Egler.Core/Video/Video.hpp"
 
@@ -7,26 +6,38 @@ FileLogger fileLogger("log.txt");
 
 int main(int argc, char **argv)
 {
-    Log::AddDefaultLogger(&fileLogger, LogLevel::Debug);
-    Log::AddDefaultLogger(&consoleLogger, LogLevel::Debug);
+    GLContext *context;
 
-    SDL_Init(SDL_INIT_VIDEO);
-
-    const PixelRect windowRect(SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480);
-    GLContext *context = new GLContext("Egler", windowRect);
-
-    while(!SDL_QuitRequested())
+    try
     {
-        Vector4 color(0, 1, 1, 1);
-        context->Window().Clear(color, 1);
-        context->Window().Present();
+        Log::AddDefaultLogger(&fileLogger, LogLevel::Debug);
+        Log::AddDefaultLogger(&consoleLogger, LogLevel::Debug);
         
-        SDL_Delay(16);
+        SDL_Init(SDL_INIT_VIDEO);
+
+        const PixelRect windowRect(SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480);
+        context = new GLContext("Egler", windowRect);
+
+        while(!SDL_QuitRequested())
+        {
+            Vector4 color(0, 1, 1, 1);
+            context->Window().Clear(color, 1);
+            context->Window().Present();
+            
+            SDL_Delay(16);
+        }
+    }
+    catch(const NotInitializedException& e)
+    {
+        LogFailure(e.what());
+        LogFailure("Press Enter to exit...");
+        getchar();
     }
 
     delete context;
     SDL_Quit();
 
+    Log::FlushDefault();
     Log::RemoveDefaultLogger(&fileLogger);
     Log::RemoveDefaultLogger(&consoleLogger);
     

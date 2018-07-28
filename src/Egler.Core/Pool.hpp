@@ -25,9 +25,9 @@ class Pool
 
         Pool(const T * const initValues, const int initValueCount) : Pool()
         {
-            assert(initValues);
-            assert(initValueCount > -1);
-            assert(initValueCount <= size);
+            CheckPtr(initValues);
+            CheckSign(initValueCount);
+            CheckRange(initValueCount, size);
 
             for(int i = 0; i < initValueCount; i++)
             { values[i].Item = initValues[i]; }
@@ -35,7 +35,8 @@ class Pool
 
         T& operator [](const Ptr& ptr)
         {
-            assert(IsAllocated(ptr));
+            if(!IsAllocated(ptr))
+            { throw OutOfRangeException("Pool pointer (index: %i, revision: %i) is invalid", ptr.Index, ptr.Revision); }
 
             return values[ptr.Index].Item;
         }
@@ -52,7 +53,8 @@ class Pool
 
         Ptr Allocate()
         {
-            assert(freeIndices.size() > 0);
+            if(freeIndices.size() <= 0)
+            { throw InvalidOperationException("Pool has no more free values"); }
             
             int i = freeIndices.front();
             freeIndices.pop();

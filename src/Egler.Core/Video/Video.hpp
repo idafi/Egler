@@ -17,3 +17,6 @@ typedef GLuint IndexBuffer;
 #include "ModelPool.hpp"
 #include "GLWindow.hpp"
 #include "GLContext.hpp"
+
+#define GLEWException(err, msg, ...) \
+    FailureException(msg "\n\tGLEW error: %s", ##__VA_ARGS__, glewGetErrorString(err))
