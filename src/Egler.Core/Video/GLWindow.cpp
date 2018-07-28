@@ -1,6 +1,7 @@
 #include "Video.hpp"
 
 using namespace Egler::Core;
+using namespace Egler::Logging;
 
 namespace Egler::Video
 {
@@ -11,9 +12,13 @@ namespace Egler::Video
 
     GLWindow::GLWindow(const char * const name, const PixelRect& dimensions)
     {
+        LogNote("Creating GL window...");
+
         CheckPtr(name);
         CheckSign(dimensions.Width);
         CheckSign(dimensions.Height);
+
+        LogDebug("Creating SDL window...");
 
         window = SDL_CreateWindow(name,
             dimensions.X, dimensions.Y, dimensions.Width, dimensions.Height,
@@ -23,15 +28,23 @@ namespace Egler::Video
         if(!window)
         { throw SDLException("SDL window failed to initialize."); }
 
+        LogDebug("...done.");
+        LogDebug("Creating GL context...");
+
         context = SDL_GL_CreateContext(window);
         if(!context)
         { throw SDLException("SDL failed to create GL context."); }
 
         SDL_GL_MakeCurrent(window, context);
 
+        LogDebug("...initializing GLEW...");
+
         GLenum glewErr = glewInit();
         if(glewErr != GLEW_OK)
         { throw GLEWException(glewErr, "GLEW failed to initialize."); }
+
+        LogDebug("...done.");
+        LogDebug("Setting up GL...");
 
         SDL_GL_SetSwapInterval(1);
         
@@ -45,6 +58,9 @@ namespace Egler::Video
         glDepthRange(0.0f, 1.0f);
 
         glViewport(0, 0, dimensions.Width, dimensions.Height);
+
+        LogDebug("...done.");
+        LogNote("...done.");
     }
 
     GLWindow::~GLWindow()
