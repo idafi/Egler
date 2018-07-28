@@ -6,6 +6,7 @@ namespace Egler::Logging
     {
         public:
             MOCK_METHOD2(Write, void(LogLevel level, const char * const msg));
+            MOCK_METHOD0(Flush, void());
     };
 
     class LogTest : public testing::Test
@@ -15,6 +16,15 @@ namespace Egler::Logging
             MockLogger logger;
             Log log;
     };
+
+    TEST_F(LogTest, TestFlushesOnDestruct)
+    {
+        Log *l = new Log();
+        l->AddLogger(&logger, LogLevel::Debug);
+
+        EXPECT_CALL(logger, Flush());
+        delete l;
+    }
 
     TEST_F(LogTest, TestAddLogger)
     {
@@ -39,6 +49,14 @@ namespace Egler::Logging
 
         EXPECT_CALL(logger, Write(testing::_, testing::_)).Times(0);
         log.Write(LogLevel::Note, msg);
+    }
+
+    TEST_F(LogTest, TestRemoveLoggerFlushes)
+    {
+        log.AddLogger(&logger, LogLevel::Debug);
+
+        EXPECT_CALL(logger, Flush());
+        log.RemoveLogger(&logger);
     }
 
     TEST_F(LogTest, TestChangeMinLevel)
@@ -69,6 +87,9 @@ namespace Egler::Logging
 
         EXPECT_CALL(logger, Write(testing::_, testing::_)).Times(0);
         Log::WriteToDefault(LogLevel::Note, msg);
+
+        EXPECT_CALL(logger, Flush());
+        Log::FlushDefault();
 
         Log::ChangeDefaultMinLevel(&logger, LogLevel::Note);
         EXPECT_CALL(logger, Write(LogLevel::Note, testing::HasSubstr(msg)));
