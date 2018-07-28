@@ -17,6 +17,7 @@ namespace Egler::Video
             Model(VertexArray vao, VertexBuffer vbo_pos, VertexBuffer vbo_col, IndexBuffer ibo);
 
             void SetData(const ModelBuffer& buffer);
+            void Draw() const;
 
         private:
             VertexArray vao;

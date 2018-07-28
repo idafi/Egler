@@ -83,6 +83,12 @@ namespace Egler::Video
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
+    void GLWindow::DrawModel(const Model& model, const Material& material)
+    {
+        material.Use();
+        model.Draw();
+    }
+
     void GLWindow::Present()
     {
         if(!IsCurrent())

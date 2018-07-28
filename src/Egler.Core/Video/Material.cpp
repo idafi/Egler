@@ -38,6 +38,14 @@ namespace Egler::Video
         }
     }
 
+    void Material::Use() const
+    {
+        CheckPtr(shader);
+
+        shader->Use();
+        properties.Apply(shader);
+    }
+
     void Material::SetProperty(const char *name, float value)
     {
         SetProperty<float>(properties.f1, name, value);

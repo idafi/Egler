@@ -15,6 +15,7 @@ namespace Egler::Video
 			~GLWindow();
 			
 			void Clear(const Vector4& color, const float depth);
+			void DrawModel(const Model& model, const Material& material);
 			void Present();
 
 			bool IsCurrent();

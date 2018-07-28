@@ -45,6 +45,7 @@ namespace Egler::Video
             ~Material();
             
             void SetShader(Shader& shader);
+            void Use() const;
 
             void SetProperty(const char *name, float value);
             void SetProperty(const char *name, Vector2 value);

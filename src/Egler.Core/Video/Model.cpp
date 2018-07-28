@@ -52,4 +52,13 @@ namespace Egler::Video
 
         LogDebug("...done");
     }
+
+    void Model::Draw() const
+    {
+        CheckID(vao);
+
+		glBindVertexArray(vao);
+		glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_SHORT, 0);
+		glBindVertexArray(0);
+    }
 }
