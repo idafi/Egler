@@ -1,3 +1,5 @@
+#include <fstream>
+#include <sstream>
 #include "../Egler.Core/Core/Core.hpp"
 #include "../Egler.Core/Logging/Logging.hpp"
 #include "../Egler.Core/Video/Video.hpp"
@@ -11,6 +13,7 @@ namespace Egler
     ConsoleLogger consoleLogger;
     FileLogger fileLogger("log.txt");
     GLContext *context;
+    Shader *shader;
 
     void Init()
     {
@@ -27,6 +30,30 @@ namespace Egler
 
         const PixelRect windowRect(SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480);
         context = new GLContext("Egler", windowRect);
+
+        const char * const vertFilename = "data/shader.vert";
+        const char * const fragFilename = "data/shader.frag";
+
+        std::ifstream vertFile(vertFilename);
+        std::ifstream fragFile(fragFilename);
+        std::stringstream buffer;
+
+        buffer << vertFile.rdbuf();
+        vertFile.close();
+
+        std::string vertStr = buffer.str();
+        buffer.str("");
+        ShaderSource vert(vertStr.c_str(), ShaderType::Vertex, vertFilename);
+
+        buffer << fragFile.rdbuf();
+        fragFile.close();
+
+        std::string fragStr = buffer.str();
+        buffer.str("");
+        ShaderSource frag(fragStr.c_str(), ShaderType::Fragment, fragFilename);
+
+        ShaderSource sources[] = { vert, frag };
+        shader = new Shader(sources, 2);
     }
 
     bool ShouldQuit()
@@ -45,6 +72,8 @@ namespace Egler
 
     int Quit(const int code)
     {
+        if(shader)
+        { delete shader; }
         if(context)
         { delete context; }
 
