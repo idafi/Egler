@@ -47,7 +47,7 @@ Console::Console()
 {
 	int result = AllocConsole();
 	if(result == 0)
-	{ throw new FailureException("Failed to allocate Windows console."); }
+	{ throw FailureException("Failed to allocate Windows console."); }
 	
 	// we need an extant but otherwised-unused file to satisfy freopen_s
 	freopen_s(&dummy, "CONIN$", "r", stdin);
