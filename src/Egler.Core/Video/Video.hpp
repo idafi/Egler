@@ -13,6 +13,9 @@ namespace Egler::Video
     typedef GLuint VertexArray;
     typedef GLuint VertexBuffer;
     typedef GLuint IndexBuffer;
+
+    static constexpr int MaxModels = 64;
+    static constexpr int MaxShaders = 64;
 }
 
 #include "PixelRect.hpp"

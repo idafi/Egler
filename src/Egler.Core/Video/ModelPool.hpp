@@ -7,8 +7,6 @@ namespace Egler::Video
 	class ModelPool
 	{
 		public:
-			static constexpr int MaxModels = 64;
-			
 			ModelPool();
 			~ModelPool();
 		
