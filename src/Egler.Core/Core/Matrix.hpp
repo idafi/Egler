@@ -160,5 +160,27 @@ namespace Egler::Core
 			{
 				return Matrix<4, 4>(*this) + m;
 			}
+
+			static Mat4 Perspective(float fov, float zNear, float zFar)
+			{
+				Mat4 matrix;
+
+				float frustum = GetFrustumScale(fov);
+				matrix.Set(0, 0, frustum);
+				matrix.Set(1, 1, frustum);
+				matrix.Set(2, 2, (zFar + zNear) / (zNear - zFar));
+				matrix.Set(2, 3, -1.0f);
+				matrix.Set(3, 2, (2 * zFar * zNear) / (zNear - zFar));
+
+				return matrix;
+			}
+
+		private:
+			static float GetFrustumScale(float fov)
+			{
+				const float degToRad = (float)(M_PI * 2.0f / 360.0f);
+				float rad = fov * degToRad;
+				return 1.0f / tan(rad / 2.0f);
+			}
 	};
 }

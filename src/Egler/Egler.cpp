@@ -10,21 +10,16 @@ using namespace Egler::Video;
 
 namespace Egler
 {
+    static constexpr float cameraFOV = 45;
+    static constexpr float zNear = 1;
+    static constexpr float zFar = 45;
+
     ConsoleLogger consoleLogger;
     FileLogger fileLogger("log.txt");
 
     GLContext *context;
-
-    Mat4 clipMatrix;
     ModelPool::Ptr modelPtr;
     MaterialPool::Ptr materialPtr;
-
-    float CalcFrustumScale(float fov)
-    {
-        const float degToRad = (float)(M_PI * 2.0f / 360.0f);
-        float rad = fov * degToRad;
-        return 1.0f / tan(rad / 2.0f);
-    }
 
     void Init()
     {
@@ -49,22 +44,10 @@ namespace Egler
         ShaderSourceFile vert(vertStr.c_str(), ShaderType::Vertex, vertFilename);
         ShaderSourceFile frag(fragStr.c_str(), ShaderType::Fragment, fragFilename);
         ShaderSourceFile files[] = { vert, frag };
-        ShaderSource shaders[] =  { ShaderSource(files, 2) };
+        ShaderSource shaders[] = { ShaderSource(files, 2) };
 
         GLContextData data(windowName, windowRect, shaders, 1);
         context = new GLContext(data);
-
-        // un-hardcode this later
-        float frustumScale = CalcFrustumScale(45.0f);
-        float zNear = 1.0f;
-        float zFar = 45.0f;
-        
-        // set up the matrix
-        clipMatrix.Set(0, 0, frustumScale);
-        clipMatrix.Set(1, 1, frustumScale);
-        clipMatrix.Set(2, 2, (zFar + zNear) / (zNear - zFar));
-        clipMatrix.Set(2, 3, -1.0f);
-        clipMatrix.Set(3, 2, (2 * zFar * zNear) / (zNear - zFar));
 
         ModelData modelData;
         modelData.VertexPositions = modelVertices;
@@ -77,7 +60,9 @@ namespace Egler
 
         Shader& shader = context->GetShader(0);
         materialPtr = context->Materials().Allocate(shader);
-        context->Materials()[materialPtr].SetProperty("cameraToClipMatrix", clipMatrix);
+
+        Matrix pspMatrix = Mat4::Perspective(cameraFOV, zNear, zFar);
+        context->Materials()[materialPtr].SetProperty("perspectiveMatrix", pspMatrix);
     }
 
     bool ShouldQuit()
@@ -95,7 +80,7 @@ namespace Egler
         Material& material = context->Materials()[materialPtr];
 
         modelMatrix.SetColumn(3, Vector4(0, 0, -20.0f, 1.0f));
-        material.SetProperty("modelToCameraMatrix", modelMatrix);
+        material.SetProperty("localToCameraMatrix", modelMatrix);
 
         context->Window().DrawModel(model, material);
         context->Window().Present();
