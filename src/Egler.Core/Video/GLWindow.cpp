@@ -18,7 +18,7 @@ namespace Egler::Video
         CheckSign(dimensions.Width);
         CheckSign(dimensions.Height);
 
-        LogDebug("Creating SDL window...");
+        LogDebug("...creating SDL window...");
 
         window = SDL_CreateWindow(name,
             dimensions.X, dimensions.Y, dimensions.Width, dimensions.Height,
@@ -28,8 +28,7 @@ namespace Egler::Video
         if(!window)
         { throw SDLException("SDL window failed to initialize."); }
 
-        LogDebug("...done.");
-        LogDebug("Creating GL context...");
+        LogDebug("...creating GL context...");
 
         context = SDL_GL_CreateContext(window);
         if(!context)
@@ -43,8 +42,7 @@ namespace Egler::Video
         if(glewErr != GLEW_OK)
         { throw GLEWException(glewErr, "GLEW failed to initialize."); }
 
-        LogDebug("...done.");
-        LogDebug("Setting up GL...");
+        LogDebug("...setting up GL...");
 
         SDL_GL_SetSwapInterval(1);
         
@@ -59,7 +57,6 @@ namespace Egler::Video
 
         glViewport(0, 0, dimensions.Width, dimensions.Height);
 
-        LogDebug("...done.");
         LogNote("...done.");
     }
 
