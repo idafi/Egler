@@ -2,19 +2,22 @@
 
 #include "Video.hpp"
 
-class GLContext
+namespace Egler::Video
 {
-    public:
-        GLContext();
-        GLContext(const char * const windowName, const PixelRect& windowDim);
+    class GLContext
+    {
+        public:
+            GLContext();
+            GLContext(const char * const windowName, const PixelRect& windowDim);
 
-        GLWindow& Window();
-        ModelPool& Models();
+            GLWindow& Window();
+            ModelPool& Models();
 
-        bool IsCurrent();
-        void MakeCurrent();
+            bool IsCurrent();
+            void MakeCurrent();
 
-    private:
-        GLWindow window;
-        ModelPool models;
-};
+        private:
+            GLWindow window;
+            ModelPool models;
+    };
+}

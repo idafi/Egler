@@ -4,15 +4,18 @@
 // Integer-based rect
 // - - - - - -
 
-struct PixelRect
+namespace Egler::Video
 {
-    int X, Y, Width, Height;
-    
-    PixelRect(int x, int y, int w, int h)
+    struct PixelRect
     {
-        X = x;
-        Y = y;
-        Width = w;
-        Height = h;
-    }
-};
+        int X, Y, Width, Height;
+        
+        PixelRect(int x, int y, int w, int h)
+        {
+            X = x;
+            Y = y;
+            Width = w;
+            Height = h;
+        }
+    };
+}

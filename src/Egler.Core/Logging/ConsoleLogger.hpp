@@ -6,12 +6,17 @@
 // ILogger implementation targeting program console
 // - - - - - -
 
-class ConsoleLogger : public ILogger
+using namespace Egler::Core;
+
+namespace Egler::Logging
 {
-	public:
-		void Write(const LogLevel level, const char * const msg);
-		
-	private:
-		Console console;
-		void SetLevelColor(const LogLevel level);
-};
+	class ConsoleLogger : public ILogger
+	{
+		public:
+			void Write(const LogLevel level, const char * const msg);
+			
+		private:
+			Console console;
+			void SetLevelColor(const LogLevel level);
+	};
+}

@@ -4,11 +4,14 @@
 // describes Log message severity level
 // - - - - - -
 
-enum class LogLevel
+namespace Egler::Logging
 {
-	Debug,
-	Note,
-	Warning,
-	Error,
-	Failure
-};
+	enum class LogLevel
+	{
+		Debug,
+		Note,
+		Warning,
+		Error,
+		Failure
+	};
+}

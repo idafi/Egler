@@ -7,15 +7,18 @@
 // ILogger implementation targeting output file
 // - - - - - -
 
-class FileLogger : public ILogger
+namespace Egler::Logging
 {
-	public:
-		FileLogger(const char * const filePath);
-		~FileLogger();
-		
-		void Write(const LogLevel level, const char * const msg);
-		void Flush();
-		
-	private:
-		std::ofstream file;
-};
+	class FileLogger : public ILogger
+	{
+		public:
+			FileLogger(const char * const filePath);
+			~FileLogger();
+			
+			void Write(const LogLevel level, const char * const msg);
+			void Flush();
+			
+		private:
+			std::ofstream file;
+	};
+}

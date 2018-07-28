@@ -2,29 +2,32 @@
 
 #include "Video.hpp"
 
-struct ModelBuffer
+namespace Egler::Video
 {
-    float *VertexPositions;
-    float *VertexColors;
-    int VertexCount;
-    
-    ushort *Indices;
-    int IndexCount;
-
-    ModelBuffer(int maxVertices, int maxIndices)
+    struct ModelBuffer
     {
-        CheckSign(maxVertices);
-        CheckSign(maxIndices);
+        float *VertexPositions;
+        float *VertexColors;
+        int VertexCount;
+        
+        ushort *Indices;
+        int IndexCount;
 
-        VertexPositions = new float[maxVertices];
-        VertexColors = new float[maxVertices];
-        Indices = new ushort[maxIndices];
-    }
+        ModelBuffer(int maxVertices, int maxIndices)
+        {
+            CheckSign(maxVertices);
+            CheckSign(maxIndices);
 
-    ~ModelBuffer()
-    {
-        delete VertexPositions;
-        delete VertexPositions;
-        delete Indices;
-    }
-};
+            VertexPositions = new float[maxVertices];
+            VertexColors = new float[maxVertices];
+            Indices = new ushort[maxIndices];
+        }
+
+        ~ModelBuffer()
+        {
+            delete VertexPositions;
+            delete VertexPositions;
+            delete Indices;
+        }
+    };
+}

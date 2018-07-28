@@ -8,9 +8,12 @@
 #include "../Core/Core.hpp"
 #include "../Logging/Logging.hpp"
 
-typedef GLuint VertexArray;
-typedef GLuint VertexBuffer;
-typedef GLuint IndexBuffer;
+namespace Egler::Video
+{
+    typedef GLuint VertexArray;
+    typedef GLuint VertexBuffer;
+    typedef GLuint IndexBuffer;
+}
 
 #include "PixelRect.hpp"
 #include "ModelBuffer.hpp"
