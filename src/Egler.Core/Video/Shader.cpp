@@ -4,21 +4,23 @@ using namespace Egler::Logging;
 
 namespace Egler::Video
 {
-    Shader::Shader(const ShaderSource * const source, const int sourceCount)
+    Shader::Shader()
+    {
+        program = 0;
+    }
+
+    Shader::Shader(const ShaderSource& source)
     {
         LogDebug("Creating shader...");
 
-        CheckPtr(source);
-        CheckSign(sourceCount);
-
         LogDebug("...compiling source...");
 
-        std::unique_ptr<ShaderObject[]> objects(new ShaderObject[sourceCount]);
-        for(int i = 0; i < sourceCount; i++)
-        { objects[i] = CompileObject(source[i]); }
+        std::unique_ptr<ShaderObject[]> objects(new ShaderObject[source.SourceFileCount]);
+        for(int i = 0; i < source.SourceFileCount; i++)
+        { objects[i] = CompileObject(source.SourceFiles[i]); }
 
         LogDebug("...linking program...");
-        program = LinkProgram(objects.get(), sourceCount);
+        program = LinkProgram(objects.get(), source.SourceFileCount);
 
         LogDebug("...done.");
     }
@@ -73,7 +75,7 @@ namespace Egler::Video
         { glUniformMatrix4fv(loc, 1, GL_FALSE, value.Data()); }
     }
 
-    ShaderObject Shader::CompileObject(const ShaderSource& source)
+    ShaderObject Shader::CompileObject(const ShaderSourceFile& source)
     {
         LogDebug("...creating object...");
 
