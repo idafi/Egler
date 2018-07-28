@@ -10,44 +10,66 @@ namespace Egler
 {
     ConsoleLogger consoleLogger;
     FileLogger fileLogger("log.txt");
+    GLContext *context;
 
-    int main(int argc, char **argv)
+    void Init()
     {
-        GLContext *context;
+        Log::AddDefaultLogger(&fileLogger, LogLevel::Debug);
+        Log::AddDefaultLogger(&consoleLogger, LogLevel::Debug);
 
-        try
-        {
-            Log::AddDefaultLogger(&fileLogger, LogLevel::Debug);
-            Log::AddDefaultLogger(&consoleLogger, LogLevel::Debug);
-            
-            SDL_Init(SDL_INIT_VIDEO);
+        if(SDL_Init(SDL_INIT_VIDEO) < 0)
+        { throw SDLException("SDL failed to initialize."); }
 
-            const PixelRect windowRect(SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480);
-            context = new GLContext("Egler", windowRect);
+        const PixelRect windowRect(SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480);
+        context = new GLContext("Egler", windowRect);
+    }
 
-            while(!SDL_QuitRequested())
-            {
-                Vector4 color(0, 1, 1, 1);
-                context->Window().Clear(color, 1);
-                context->Window().Present();
-                
-                SDL_Delay(16);
-            }
-        }
-        catch(const NotInitializedException& e)
-        {
-            LogFailure(e.what());
-            LogFailure("Press Enter to exit...");
-            getchar();
-        }
+    bool ShouldQuit()
+    {
+        return SDL_QuitRequested();
+    }
 
-        delete context;
+    void Frame()
+    {
+        Vector4 color(0, 1, 1, 1);
+        context->Window().Clear(color, 1);
+        context->Window().Present();
+        
+        SDL_Delay(16);
+    }
+
+    int Quit(const int code)
+    {
+        if(context)
+        { delete context; }
+
         SDL_Quit();
 
         Log::FlushDefault();
         Log::RemoveDefaultLogger(&fileLogger);
         Log::RemoveDefaultLogger(&consoleLogger);
-        
-        return 0;
+
+        return code;
     }
+}
+
+int main(int argc, char **argv)
+{
+    try
+    {
+        Egler::Init();
+
+        while(!Egler::ShouldQuit())
+        { Egler::Frame(); }
+
+        return Egler::Quit(0);
+    }
+    catch(const Egler::EglerException& e)
+    {
+        LogFailure(e.what());
+        LogFailure("Press Enter to exit...");
+        getchar();
+    }
+
+    return Egler::Quit(1);
 }
