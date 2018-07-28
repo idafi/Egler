@@ -2,6 +2,7 @@
 #include "../Egler.Core/IO/IO.hpp"
 #include "../Egler.Core/Logging/Logging.hpp"
 #include "../Egler.Core/Video/Video.hpp"
+#include "Models.hpp"
 
 using namespace Egler::Core;
 using namespace Egler::Logging;
@@ -11,7 +12,19 @@ namespace Egler
 {
     ConsoleLogger consoleLogger;
     FileLogger fileLogger("log.txt");
+
     GLContext *context;
+
+    Mat4 clipMatrix;
+    ModelPool::Ptr modelPtr;
+    MaterialPool::Ptr materialPtr;
+
+    float CalcFrustumScale(float fov)
+    {
+        const float degToRad = (float)(M_PI * 2.0f / 360.0f);
+        float rad = fov * degToRad;
+        return 1.0f / tan(rad / 2.0f);
+    }
 
     void Init()
     {
@@ -40,6 +53,30 @@ namespace Egler
 
         GLContextData data(windowName, windowRect, shaders, 1);
         context = new GLContext(data);
+
+        // un-hardcode this later
+        float frustumScale = CalcFrustumScale(45.0f);
+        float zNear = 1.0f;
+        float zFar = 45.0f;
+        
+        // set up the matrix
+        clipMatrix.Set(0, 0, frustumScale);
+        clipMatrix.Set(1, 1, frustumScale);
+        clipMatrix.Set(2, 2, (zFar + zNear) / (zNear - zFar));
+        clipMatrix.Set(2, 3, -1.0f);
+        clipMatrix.Set(3, 2, (2 * zFar * zNear) / (zNear - zFar));
+
+        ModelBuffer modelData(64, 64);
+        memcpy(modelData.VertexPositions, modelVertices, sizeof(modelVertices));
+        memcpy(modelData.VertexColors, modelColors, sizeof(modelColors));
+        memcpy(modelData.Indices, modelIndices, sizeof(modelIndices));
+        modelData.IndexCount = 24;
+
+        modelPtr = context->Models().Allocate(modelData);
+
+        Shader& shader = context->GetShader(0);
+        materialPtr = context->Materials().Allocate(shader);
+        context->Materials()[materialPtr].SetProperty("cameraToClipMatrix", clipMatrix);
     }
 
     bool ShouldQuit()
@@ -51,6 +88,13 @@ namespace Egler
     {
         Vector4 color(0, 1, 1, 1);
         context->Window().Clear(color, 1);
+
+        Mat4 modelMatrix = Mat4::Identity();
+        Model& model = context->Models()[modelPtr];
+        Material& material = context->Materials()[materialPtr];
+        material.SetProperty("modelToCameraMatrix", modelMatrix);
+
+        context->Window().DrawModel(model, material);
         context->Window().Present();
         
         Core::Delay(16);
