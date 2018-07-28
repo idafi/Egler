@@ -34,13 +34,13 @@ struct Matrix
 		
 		float operator [](int i) const
 		{
-			AssertIndex(i);
+			CheckIndex(i, Size);
 			return c[i];
 		}
 		
 		float& operator [](int i)
 		{
-			AssertIndex(i);
+			CheckIndex(i, Size);
 			return c[i];
 		}
 		
@@ -139,15 +139,10 @@ struct Matrix
 	private:
 		float c[Size];
 
-		inline void AssertIndex(int i) const
-		{
-			assert(i > -1 && i < Size);
-		}
-		
 		int GetIndex(int column, int row) const
 		{
 			int i = (column * rows) + row;
-			AssertIndex(i);
+			CheckIndex(i, Size);
 
 			return i;
 		}

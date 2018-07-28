@@ -7,23 +7,27 @@ GLWindow::GLWindow()
 
 GLWindow::GLWindow(const char * const name, const PixelRect& dimensions)
 {
-	assert(name);
-    assert(dimensions.Width > -1);
-    assert(dimensions.Height > -1);
+	CheckPtr(name);
+    CheckSign(dimensions.Width);
+    CheckSign(dimensions.Height);
 
     window = SDL_CreateWindow(name,
         dimensions.X, dimensions.Y, dimensions.Width, dimensions.Height,
         SDL_WINDOW_OPENGL
     );
-    assert(window);
+
+    if(!window)
+    { throw SDLException("SDL window failed to initialize."); }
 
     context = SDL_GL_CreateContext(window);
-    assert(context);
+    if(!context)
+    { throw SDLException("SDL failed to create GL context."); }
 
     SDL_GL_MakeCurrent(window, context);
 
     GLenum glewErr = glewInit();
-    assert(glewErr == GLEW_OK);
+    if(glewErr != GLEW_OK)
+    { throw GLEWException(glewErr, "GLEW failed to initialize."); }
 
     SDL_GL_SetSwapInterval(1);
     
@@ -50,7 +54,8 @@ GLWindow::~GLWindow()
 
 void GLWindow::Clear(const Vector4& color, const float depth)
 {
-	assert(IsCurrent());
+	if(!IsCurrent())
+    { throw new NotInitializedException("GL window to clear is not of the current GL context (%i).", context); }
 	
     glClearColor(color[0], color[1], color[2], color[3]);
     glClearDepth(depth);
@@ -59,7 +64,8 @@ void GLWindow::Clear(const Vector4& color, const float depth)
 
 void GLWindow::Present()
 {
-	assert(IsCurrent());
+	if(!IsCurrent())
+    { throw new NotInitializedException("GL window to clear is not of the current GL context (%i).", context); }
 	
     SDL_GL_SwapWindow(window);
 }

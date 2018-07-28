@@ -10,10 +10,10 @@ Model::Model(VertexArray vao, VertexBuffer vbo_pos, VertexBuffer vbo_col, IndexB
 
 void Model::SetData(const ModelBuffer& buffer)
 {
-    assert(vao > 0);
-    assert(vbo_pos > 0);
-    assert(vbo_col > 0);
-    assert(ibo > 0);
+    CheckID(vao);
+    CheckID(vbo_pos);
+    CheckID(vbo_col);
+    CheckID(ibo);
 
     glBindVertexArray(vao);
 

@@ -50,12 +50,12 @@ TEST_F(LogTest, TestChangeMinLevel)
 
 TEST_F(LogTest, TestWriteFailsOnNullMsg)
 {
-    ASSERT_DEATH(log.Write(LogLevel::Note, nullptr), ".*");
+    ASSERT_THROW(log.Write(LogLevel::Note, nullptr), NullPtrException);
 }
 
 TEST_F(LogTest, TestHandlesNoLogs)
 {
-    ASSERT_NO_FATAL_FAILURE(log.Write(LogLevel::Note, msg));
+    ASSERT_NO_THROW(log.Write(LogLevel::Note, msg));
 }
 
 TEST_F(LogTest, TestDefaultLogger)

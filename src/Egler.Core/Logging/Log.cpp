@@ -8,7 +8,7 @@ Log Log::defaultLog;
 
 void Log::AddDefaultLogger(ILogger * const logger, const LogLevel minLevel)
 {
-	assert(logger);
+	CheckPtr(logger);
 	defaultLog.AddLogger(logger, minLevel);
 }
 
@@ -20,13 +20,13 @@ void Log::RemoveDefaultLogger(ILogger * const logger)
 
 void Log::ChangeDefaultMinLevel(ILogger * const logger, const LogLevel minLevel)
 {
-	assert(logger);
+	CheckPtr(logger);
 	defaultLog.ChangeMinLevel(logger, minLevel);
 }
 
 void Log::WriteToDefault(const LogLevel level, char const * const msg, ...)
 {
-	assert(msg);
+	CheckPtr(msg);
 
 	va_list args;
 	va_start(args, msg);
@@ -36,7 +36,7 @@ void Log::WriteToDefault(const LogLevel level, char const * const msg, ...)
 
 void Log::AddLogger(ILogger * const logger, const LogLevel minLevel)
 {
-	assert(logger);
+	CheckPtr(logger);
 	loggers[logger] = minLevel;
 }
 
@@ -48,7 +48,7 @@ void Log::RemoveLogger(ILogger * const logger)
 
 void Log::ChangeMinLevel(ILogger * const logger, const LogLevel minLevel)
 {
-	assert(logger);
+	CheckPtr(logger);
 	
 	if(loggers.find(logger) != loggers.end())
 	{ loggers[logger] = minLevel; }
@@ -58,7 +58,7 @@ void Log::ChangeMinLevel(ILogger * const logger, const LogLevel minLevel)
 
 void Log::Write(const LogLevel level, char const * const msg, ...)
 {
-	assert(msg);
+	CheckPtr(msg);
 	
 	va_list args;
 	va_start(args, msg);
@@ -84,7 +84,7 @@ void Log::GetTimestamp(char *buffer)
 
 void Log::Write(const LogLevel level, char const * const msg, va_list args)
 {
-	assert(msg);
+	CheckPtr(msg);
 	
 	if(loggers.size() > 0)
 	{

@@ -12,7 +12,7 @@ ConsoleLogger::~ConsoleLogger()
 
 void ConsoleLogger::Write(const LogLevel level, const char * const msg)
 {
-	assert(msg);
+	CheckPtr(msg);
 	
 	SetLevelColor(level);
 	console->Print(msg);

@@ -223,22 +223,22 @@ TEST_F(MatrixTest, TestGetData)
 
 TEST_F(MatrixTest, TestIndexFailsOnBadIndex)
 {
-    ASSERT_DEATH(a[-1], ".*");
-    ASSERT_DEATH(a[20], ".*");
+    ASSERT_THROW(a[-1], OutOfRangeException);
+    ASSERT_THROW(a[20], OutOfRangeException);
 }
 
 TEST_F(MatrixTest, TestGetFailsOnBadInput)
 {
-    ASSERT_DEATH(a.Get(-1, 0), ".*");
-    ASSERT_DEATH(a.Get(0, -1), ".*");
-    ASSERT_DEATH(a.Get(20, 0), ".*");
-    ASSERT_DEATH(a.Get(0, 20), ".*");
+    ASSERT_THROW(a.Get(-1, 0), OutOfRangeException);
+    ASSERT_THROW(a.Get(0, -1), OutOfRangeException);
+    ASSERT_THROW(a.Get(20, 0), OutOfRangeException);
+    ASSERT_THROW(a.Get(0, 20), OutOfRangeException);
 }
 
 TEST_F(MatrixTest, TestSetFailsOnBadInput)
 {
-    ASSERT_DEATH(a.Set(-1, 0, 0), ".*");
-    ASSERT_DEATH(a.Set(0, -1, 0), ".*");
-    ASSERT_DEATH(a.Set(20, 0, 0), ".*");
-    ASSERT_DEATH(a.Set(0, 20, 0), ".*");
+    ASSERT_THROW(a.Set(-1, 0, 0), OutOfRangeException);
+    ASSERT_THROW(a.Set(0, -1, 0), OutOfRangeException);
+    ASSERT_THROW(a.Set(20, 0, 0), OutOfRangeException);
+    ASSERT_THROW(a.Set(0, 20, 0), OutOfRangeException);
 }

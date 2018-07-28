@@ -2,7 +2,8 @@
 
 ModelPool::ModelPool()
 {
-	assert(SDL_GL_GetCurrentContext());
+	if(!SDL_GL_GetCurrentContext())
+	{ throw new NotInitializedException("No GL context has been initialized yet."); }
 
 	glGenBuffers(maxVAOs, vaos);
 	glGenBuffers(maxVBOs, vbos);
