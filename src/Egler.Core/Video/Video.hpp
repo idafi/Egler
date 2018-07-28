@@ -5,7 +5,8 @@
 // - - - - - -
 
 #include <GL/glew.h>
-#include "../Core.hpp"
+#include "../Core/Core.hpp"
+#include "../Logging/Logging.hpp"
 
 typedef GLuint VertexArray;
 typedef GLuint VertexBuffer;

@@ -1,10 +1,9 @@
 #pragma once
 
 #include <SDL2/SDL.h>
-#include "Common.hpp"
+#include "../Common.hpp"
 
 #include "Console.hpp"
-#include "Logging/Logging.hpp"
 #include "Matrix.hpp"
 #include "Vector.hpp"
 #include "Pool.hpp"
