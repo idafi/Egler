@@ -19,6 +19,7 @@ namespace Egler::Video
 #include "ModelBuffer.hpp"
 #include "Model.hpp"
 #include "ModelPool.hpp"
+#include "Shader.hpp"
 #include "GLWindow.hpp"
 #include "GLContext.hpp"
 
