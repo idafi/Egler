@@ -24,6 +24,7 @@ namespace Egler::Video
             GLContext(const GLContextData& contextData);
 
             GLWindow& Window();
+            Shader& GetShader(int index);
             ModelPool& Models();
             MaterialPool& Materials();
 

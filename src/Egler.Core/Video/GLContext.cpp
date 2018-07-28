@@ -13,6 +13,12 @@ namespace Egler::Video
         { shaders[i] = Shader(contextData.Shaders[i]); }
     }
 
+    Shader& GLContext::GetShader(int index)
+    {
+        CheckIndex(index, shaderCount);
+        return shaders[index];
+    }
+
     GLWindow& GLContext::Window()
     {
         return window;
