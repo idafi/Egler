@@ -50,7 +50,7 @@ namespace Egler::Video
 
         indexCount = data.IndexCount;
 
-        LogDebug("...done");
+        LogDebug("...done.");
     }
 
     void Model::Draw() const
