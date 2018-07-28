@@ -22,7 +22,7 @@ namespace Egler
 
         if(SDL_Init(SDL_INIT_VIDEO) < 0)
         { throw SDLException("SDL failed to initialize."); }
-        
+
         LogNote("...done.");
 
         const PixelRect windowRect(SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480);
@@ -52,7 +52,7 @@ namespace Egler
         SDL_Quit();
         LogNote("...done.");
 
-        LogNote("Flushing and shutting down logs...");
+        LogNote("Flushing and shutting down logs.");
         Log::FlushDefault();
         Log::RemoveDefaultLogger(&fileLogger);
         Log::RemoveDefaultLogger(&consoleLogger);
