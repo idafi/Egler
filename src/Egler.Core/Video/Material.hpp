@@ -32,7 +32,9 @@ namespace Egler::Video
 
     class Material
     {
-        public:     
+        public:
+            ~Material();
+            
             void SetShader(Shader& shader);
 
             void SetProperty(const char *name, float value);
@@ -42,12 +44,13 @@ namespace Egler::Video
             void SetProperty(const char *name, Mat4 value);
 
         private:
-            Shader& shader;
+            Shader *shader;
             MaterialProperties properties;
 
             template<typename T>
             void SetProperty(std::map<const char *, T>& properties, const char *name, T value)
             {
+                CheckPtr(shader);
                 CheckPtr(name);
 
                 if(!properties.count(name))
