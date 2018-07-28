@@ -31,9 +31,11 @@ namespace Egler::Video
 
         private:
             GLWindow window;
-            ModelPool models;
 
             Shader shaders[MaxShaders];
             int shaderCount;
+
+            ModelPool models;
+            MaterialPool materials;
     };
 }

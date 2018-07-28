@@ -16,6 +16,7 @@ namespace Egler::Video
 
     static constexpr int MaxModels = 64;
     static constexpr int MaxShaders = 64;
+    static constexpr int MaxMaterials = 96;
 }
 
 #include "PixelRect.hpp"
@@ -24,6 +25,7 @@ namespace Egler::Video
 #include "ModelPool.hpp"
 #include "Shader.hpp"
 #include "Material.hpp"
+#include "MaterialPool.hpp"
 #include "GLWindow.hpp"
 #include "GLContext.hpp"
 
