@@ -53,9 +53,6 @@ namespace Egler::Video
                 CheckPtr(shader);
                 CheckPtr(name);
 
-                if(!properties.count(name))
-                { throw new BadArgumentException("Property '%s' is not known to this material.", name); }
-
                 properties[name] = value;
             }
     };
