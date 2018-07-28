@@ -50,5 +50,6 @@ class EglerException : public std::exception
 _DefineException(NullPtrException)
 _DefineException(BadArgumentException)
 _DefineException(OutOfRangeException)
+_DefineException(InvalidOperationException)
 _DefineException(NotInitializedException)
 _DefineException(FailureException)
