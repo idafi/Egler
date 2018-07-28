@@ -66,10 +66,10 @@ namespace Egler::Video
         return models.Count();
     }
 
-    ModelPool::Ptr ModelPool::Allocate(const ModelBuffer& dataBuffer)
+    ModelPool::Ptr ModelPool::Allocate(const ModelData& data)
     {
         Ptr ptr = models.Allocate();
-		models[ptr].SetData(dataBuffer);
+		models[ptr].SetData(data);
 
 		return ptr;
     }

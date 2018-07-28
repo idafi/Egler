@@ -20,7 +20,7 @@ namespace Egler::Video
 }
 
 #include "PixelRect.hpp"
-#include "ModelBuffer.hpp"
+#include "ModelData.hpp"
 #include "Model.hpp"
 #include "ModelPool.hpp"
 #include "Shader.hpp"

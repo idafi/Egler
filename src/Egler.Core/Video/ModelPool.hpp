@@ -17,7 +17,7 @@ namespace Egler::Video
             int Capacity();
             int Count();
 
-            Ptr Allocate(const ModelBuffer& dataBuffer);
+            Ptr Allocate(const ModelData& data);
             void Free(const Ptr& ptr);
             bool IsAllocated(const Ptr& ptr);
             void Clear();
