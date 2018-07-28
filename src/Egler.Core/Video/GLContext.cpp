@@ -2,13 +2,15 @@
 
 namespace Egler::Video
 {
-    GLContext::GLContext()
+    GLContext::GLContext(const GLContextData& contextData)
+    : window(contextData.WindowName, contextData.WindowDimensions)
     {
-    }
+        CheckPtr(contextData.Shaders);
+        CheckRange(contextData.ShaderCount, MaxShaders);
 
-    GLContext::GLContext(const char * const windowName, const PixelRect& windowDim)
-    : window(GLWindow(windowName, windowDim))
-    {
+        shaderCount = contextData.ShaderCount;
+        for(int i = 0; i < shaderCount; i++)
+        { shaders[i] = Shader(contextData.Shaders[i]); }
     }
 
     GLWindow& GLContext::Window()

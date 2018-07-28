@@ -4,11 +4,24 @@
 
 namespace Egler::Video
 {
+    struct GLContextData
+    {
+        const char * const WindowName;
+        const PixelRect WindowDimensions;
+
+        const ShaderSource * const Shaders;
+        const int ShaderCount;
+
+        GLContextData(const char * const windowName, const PixelRect& windowDimensions,
+            const ShaderSource * const shaders, const int shaderCount)
+        : WindowName(windowName), WindowDimensions(windowDimensions), Shaders(shaders), ShaderCount(shaderCount)
+        { }
+    };
+
     class GLContext
     {
         public:
-            GLContext();
-            GLContext(const char * const windowName, const PixelRect& windowDim);
+            GLContext(const GLContextData& contextData);
 
             GLWindow& Window();
             ModelPool& Models();
@@ -19,5 +32,8 @@ namespace Egler::Video
         private:
             GLWindow window;
             ModelPool models;
+
+            Shader shaders[MaxShaders];
+            int shaderCount;
     };
 }
