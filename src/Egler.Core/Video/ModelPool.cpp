@@ -51,6 +51,11 @@ namespace Egler::Video
 		LogNote("...done.");
 	}
 
+	Model& ModelPool::operator [](const Ptr& ptr)
+	{
+		return models[ptr];
+	}
+
     int ModelPool::Capacity()
     {
         return models.Capacity();

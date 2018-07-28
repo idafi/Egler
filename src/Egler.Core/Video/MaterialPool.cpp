@@ -7,6 +7,11 @@ namespace Egler::Video
         materials.Clear();
     }
 
+    Material& MaterialPool::operator [](const Ptr& ptr)
+    {
+        return materials[ptr];
+    }
+
     int MaterialPool::Capacity()
     {
         return materials.Capacity();

@@ -12,6 +12,8 @@ namespace Egler::Video
 			ModelPool();
 			~ModelPool();
 
+			Model& operator [](const Ptr& ptr);
+
             int Capacity();
             int Count();
 

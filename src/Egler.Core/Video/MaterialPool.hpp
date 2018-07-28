@@ -11,6 +11,8 @@ namespace Egler::Video
 
             ~MaterialPool();
 
+            Material& operator [](const Ptr& ptr);
+
             int Capacity();
             int Count();
 
