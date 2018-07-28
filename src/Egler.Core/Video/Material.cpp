@@ -17,16 +17,16 @@ namespace Egler::Video
                     properties.f1[uniform.Name] = 0;
                     break;
                 case ShaderUniformType::F2:
-                    properties.f2[uniform.Name] = 0;
+                    properties.f2[uniform.Name] = Vector2();
                     break;
                 case ShaderUniformType::F3:
-                    properties.f3[uniform.Name] = 0;
+                    properties.f3[uniform.Name] = Vector3();
                     break;
                 case ShaderUniformType::F4:
-                    properties.f4[uniform.Name] = 0;
+                    properties.f4[uniform.Name] = Vector4();
                     break;
                 case ShaderUniformType::M4:
-                    properties.m4[uniform.Name] = 0;
+                    properties.m4[uniform.Name] = Mat4();
                     break;
             }
         }
