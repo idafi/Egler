@@ -25,9 +25,9 @@ namespace Egler::Video
 
         ~ModelBuffer()
         {
-            delete VertexPositions;
-            delete VertexPositions;
-            delete Indices;
+            delete[] VertexPositions;
+            delete[] VertexColors;
+            delete[] Indices;
         }
     };
 }
