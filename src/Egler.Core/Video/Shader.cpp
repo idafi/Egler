@@ -81,7 +81,7 @@ namespace Egler::Video
         if(obj <= 0)
         { throw FailureException("Failed to create shader object."); }
 
-        LogDebug("...compiling source into object...");
+        LogDebug("...compiling '%s'...", source.FileName);
 
         glShaderSource(obj, 1, (const GLchar **)(&source.Source), nullptr);
         glCompileShader(obj);
