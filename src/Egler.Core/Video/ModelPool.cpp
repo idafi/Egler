@@ -2,6 +2,8 @@
 
 ModelPool::ModelPool()
 {
+	assert(SDL_GL_GetCurrentContext());
+
 	glGenBuffers(maxVAOs, vaos);
 	glGenBuffers(maxVBOs, vbos);
 	glGenBuffers(maxIBOs, ibos);
