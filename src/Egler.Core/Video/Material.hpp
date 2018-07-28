@@ -8,10 +8,10 @@ namespace Egler::Video
     struct MaterialProperties
     {
         std::map<const char *, float> f1;
-        std::map<const char *, float> f2;
-        std::map<const char *, float> f3;
-        std::map<const char *, float> f4;
-        std::map<const char *, float> m4;
+        std::map<const char *, Vector2> f2;
+        std::map<const char *, Vector3> f3;
+        std::map<const char *, Vector4> f4;
+        std::map<const char *, Mat4> m4;
 
         void Clear()
         {
