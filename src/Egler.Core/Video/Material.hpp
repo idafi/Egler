@@ -22,11 +22,20 @@ namespace Egler::Video
             m4.clear();
         }
 
+        void Apply(Shader * const shader) const
+        {
+            Apply<float>(f1, shader);
+            Apply<Vector2>(f2, shader);
+            Apply<Vector3>(f3, shader);
+            Apply<Vector4>(f4, shader);
+            Apply<Mat4>(m4, shader);
+        }
+
         template<typename T>
-        void Apply(std::map<const char *, T> properties, const Shader& shader)
+        void Apply(std::map<const char *, T> properties, Shader * const shader) const
         {
             for(auto pair : properties)
-            { shader.SetUniform(pair.first, pair.second); }
+            { shader->SetUniform(pair.first, pair.second); }
         }
     };
 
