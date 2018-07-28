@@ -70,6 +70,7 @@ namespace Egler
         memcpy(modelData.VertexPositions, modelVertices, sizeof(modelVertices));
         memcpy(modelData.VertexColors, modelColors, sizeof(modelColors));
         memcpy(modelData.Indices, modelIndices, sizeof(modelIndices));
+        modelData.VertexCount = 8;
         modelData.IndexCount = 24;
 
         modelPtr = context->Models().Allocate(modelData);
