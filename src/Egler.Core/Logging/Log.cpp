@@ -93,7 +93,7 @@ void Log::Write(const LogLevel level, char const * const msg, va_list args)
 
 		vsnprintf(fmt, MAX_LOG_MSG, msg, args);
 		GetTimestamp(out);
-		snprintf(out, MAX_LOG_MSG, "%s: %s", out, fmt);
+		snprintf(out, MAX_LOG_MSG, "%s: %s\n", out, fmt);
 
 		for(auto pair : loggers)
 		{
