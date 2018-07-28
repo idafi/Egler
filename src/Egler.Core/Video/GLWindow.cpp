@@ -54,7 +54,7 @@ GLWindow::~GLWindow()
 
 void GLWindow::Clear(const Vector4& color, const float depth)
 {
-	if(IsCurrent())
+	if(!IsCurrent())
     { throw NotInitializedException("GL window to clear is not of the current GL context (%i).", context); }
 	
     glClearColor(color[0], color[1], color[2], color[3]);
