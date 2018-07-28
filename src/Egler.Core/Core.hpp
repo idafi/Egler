@@ -5,6 +5,8 @@
 
 #include "Console.hpp"
 #include "Logging/Logging.hpp"
+#include "Matrix.hpp"
+#include "Vector.hpp"
 #include "Pool.hpp"
 
 #define SDLException(msg, ...) \
