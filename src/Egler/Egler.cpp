@@ -66,10 +66,10 @@ namespace Egler
         clipMatrix.Set(2, 3, -1.0f);
         clipMatrix.Set(3, 2, (2 * zFar * zNear) / (zNear - zFar));
 
-        ModelBuffer modelData(64, 64);
-        memcpy(modelData.VertexPositions, modelVertices, sizeof(modelVertices));
-        memcpy(modelData.VertexColors, modelColors, sizeof(modelColors));
-        memcpy(modelData.Indices, modelIndices, sizeof(modelIndices));
+        ModelData modelData;
+        modelData.VertexPositions = modelVertices;
+        modelData.VertexColors = modelColors;
+        modelData.Indices = modelIndices;
         modelData.VertexCount = 8;
         modelData.IndexCount = 24;
 
@@ -87,12 +87,14 @@ namespace Egler
 
     void Frame()
     {
-        Vector4 color(0, 1, 1, 1);
+        Vector4 color(0, 0, 0, 1);
         context->Window().Clear(color, 1);
 
         Mat4 modelMatrix = Mat4::Identity();
         Model& model = context->Models()[modelPtr];
         Material& material = context->Materials()[materialPtr];
+
+        modelMatrix.SetColumn(3, Vector4(0, 0, -20.0f, 1.0f));
         material.SetProperty("modelToCameraMatrix", modelMatrix);
 
         context->Window().DrawModel(model, material);

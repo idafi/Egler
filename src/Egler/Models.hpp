@@ -10,7 +10,7 @@
 
 namespace Egler
 {
-	float modelVertices[] =
+	const float modelVertices[] =
 	{
 		+1.0f, +1.0f, +1.0f,
 		-1.0f, -1.0f, +1.0f,
@@ -23,7 +23,7 @@ namespace Egler
 		-1.0f, +1.0f, +1.0f
 	};
 
-	float modelColors[] =
+	const float modelColors[] =
 	{
 		GREEN_COLOR,
 		BLUE_COLOR,
@@ -36,7 +36,7 @@ namespace Egler
 		BROWN_COLOR
 	};
 
-	ushort modelIndices[] =
+	const ushort modelIndices[] =
 	{
 		0, 1, 2,
 		1, 0, 3,
