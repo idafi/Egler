@@ -18,3 +18,8 @@ void FileLogger::Write(LogLevel level, const char * const msg)
 	
 	file << msg;
 }
+
+void FileLogger::Flush()
+{
+	file.flush();
+}

@@ -14,6 +14,7 @@ class FileLogger : public ILogger
 		~FileLogger();
 		
 		void Write(const LogLevel level, const char * const msg);
+		void Flush();
 		
 	private:
 		std::ofstream file;

@@ -15,12 +15,16 @@ class Log
 		static void RemoveDefaultLogger(ILogger * const logger);
 		static void ChangeDefaultMinLevel(ILogger * const logger, const LogLevel minLevel);
 		static void WriteToDefault(const LogLevel level, char const * const msg, ...);
+		static void FlushDefault();
+
+		~Log();
 	
 		void AddLogger(ILogger * const logger, const LogLevel minLevel);
 		void RemoveLogger(ILogger * const logger);
 		void ChangeMinLevel(ILogger * const logger, const LogLevel minLevel);
 		
 		void Write(const LogLevel level, char const * const msg, ...);
+		void Flush();
 		
 	private:
 		static Log defaultLog;

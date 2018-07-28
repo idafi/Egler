@@ -6,6 +6,12 @@
 
 Log Log::defaultLog;
 
+Log::~Log()
+{
+	Flush();
+	loggers.clear();
+}
+
 void Log::AddDefaultLogger(ILogger * const logger, const LogLevel minLevel)
 {
 	CheckPtr(logger);
@@ -34,6 +40,11 @@ void Log::WriteToDefault(const LogLevel level, char const * const msg, ...)
 	va_end(args);
 }
 
+void Log::FlushDefault()
+{
+	defaultLog.Flush();
+}
+
 void Log::AddLogger(ILogger * const logger, const LogLevel minLevel)
 {
 	CheckPtr(logger);
@@ -43,7 +54,10 @@ void Log::AddLogger(ILogger * const logger, const LogLevel minLevel)
 void Log::RemoveLogger(ILogger * const logger)
 {
 	if(logger)
-	{ loggers.erase(logger); }
+	{
+		loggers.erase(logger);
+		logger->Flush();
+	}
 }
 
 void Log::ChangeMinLevel(ILogger * const logger, const LogLevel minLevel)
@@ -102,4 +116,10 @@ void Log::Write(const LogLevel level, char const * const msg, va_list args)
 			{ pair.first->Write(level, out); }
 		}
 	}
+}
+
+void Log::Flush()
+{
+	for(auto pair : loggers)
+	{ pair.first->Flush(); }
 }
