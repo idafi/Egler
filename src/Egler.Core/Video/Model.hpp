@@ -4,6 +4,16 @@
 
 namespace Egler::Video
 {
+    struct ModelData
+    {
+        const float *VertexPositions;
+        const float *VertexColors;
+        int VertexCount;
+        
+        const ushort *Indices;
+        int IndexCount;
+    };
+
     class Model
     {
         enum class VertexAttr
