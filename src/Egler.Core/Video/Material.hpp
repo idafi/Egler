@@ -5,10 +5,35 @@
 
 namespace Egler::Video
 {
+    struct MaterialProperties
+    {
+        std::map<const char *, float> f1;
+        std::map<const char *, float> f2;
+        std::map<const char *, float> f3;
+        std::map<const char *, float> f4;
+        std::map<const char *, float> m4;
+
+        void Clear()
+        {
+            f1.clear();
+            f2.clear();
+            f3.clear();
+            f4.clear();
+            m4.clear();
+        }
+
+        template<typename T>
+        void Apply(std::map<const char *, T> properties, const Shader& shader)
+        {
+            for(auto pair : properties)
+            { shader.SetUniform(pair.first, pair.second); }
+        }
+    };
+
     class Material
     {
-        public:
-            Material(Shader& shader);
+        public:     
+            void SetShader(Shader& shader);
 
             void SetProperty(const char *name, float value);
             void SetProperty(const char *name, Vector2 value);
@@ -30,21 +55,5 @@ namespace Egler::Video
 
                 properties[name] = value;
             }
-    };
-
-    struct MaterialProperties
-    {
-        std::map<const char *, float> f1;
-        std::map<const char *, float> f2;
-        std::map<const char *, float> f3;
-        std::map<const char *, float> f4;
-        std::map<const char *, float> m4;
-
-        template<typename T>
-        void Apply(std::map<const char *, T> properties, const Shader& shader)
-        {
-            for(auto pair : properties)
-            { shader.SetUniform(pair.first, pair.second); }
-        }
     };
 }

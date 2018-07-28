@@ -2,9 +2,11 @@
 
 namespace Egler::Video
 {
-    Material::Material(Shader& shader)
-    : shader(shader)
+    void Material::SetShader(Shader& shader)
     {
+        this->shader = shader;
+        properties.Clear();
+        
         int ct = shader.GetUniformCount();
         for(int i = 0; i < ct; i++)
         {
