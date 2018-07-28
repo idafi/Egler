@@ -62,11 +62,15 @@ namespace Egler::Video
 
     GLWindow::~GLWindow()
     {
+        LogNote("Destroying GL context...");
+
         SDL_GL_DeleteContext(context);
         SDL_DestroyWindow(window);
         
         context = nullptr;
         window = nullptr;
+
+        LogNote("...done.");
     }
 
     void GLWindow::Clear(const Vector4& color, const float depth)
