@@ -5,7 +5,7 @@ clang++ ^
     -g -gcodeview ^
     -O0 ^
     -std=c++17 ^
-    -Wall -Wno-pragma-pack ^
+    -Wall -Wno-pragma-pack -Wno-null-dereference ^
     -I%SDL2_INC% -I%GLEW_INC% -I%FBX_INC% ^
     -o%OUT%\Egler.exe ^
     "%SRC%\Egler\Egler.cpp" ^
