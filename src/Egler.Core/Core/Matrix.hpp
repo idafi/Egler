@@ -118,8 +118,8 @@ namespace Egler::Core
 			Matrix<1, rows> GetColumn(int column)
 			{
 				Matrix<1, rows> mat;
-				int i = GetIndex(column, 0);
-				memcpy((void *)(mat.Data()), &c[i], sizeof(float) * rows);
+				for(int i = 0; i < rows; i++)
+				{ mat.Set(0, i, Get(column, i)); }
 
 				return mat;
 			}
@@ -128,7 +128,7 @@ namespace Egler::Core
 			{
 				Matrix<1, columns> mat;
 				for(int i = 0; i < columns; i++)
-				{ mat.Set(i, row, Get(0, i)); }
+				{ mat.Set(0, i, Get(i, row)); }
 
 				return mat;
 			}
@@ -141,8 +141,8 @@ namespace Egler::Core
 			
 			void SetColumn(int column, Matrix<1, rows> values)
 			{
-				int i = GetIndex(column, 0);
-				memcpy(&c[i], values.Data(), sizeof(float) * rows);
+				for(int i = 0; i < rows; i++)
+				{ Set(column, i, values.Get(0, i)); }
 			}
 			
 			void SetRow(int row, Matrix<1, columns> values)
