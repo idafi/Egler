@@ -108,4 +108,11 @@ namespace Egler::Video
         SDL_GLContext current = SDL_GL_GetCurrentContext();
         return (current != nullptr && current == context);
     }
+
+    Vector2 GLWindow::Size()
+    {
+        int w, h;
+        SDL_GetWindowSize(window, &w, &h);
+        return Vector2(w, h);
+    }
 }

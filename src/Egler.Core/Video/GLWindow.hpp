@@ -20,6 +20,8 @@ namespace Egler::Video
 
 			bool IsCurrent();
 			void MakeCurrent();
+
+			Vector2 Size();
 		
 		private:
 			SDL_Window *window;

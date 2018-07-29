@@ -60,9 +60,6 @@ namespace Egler
 
         Shader& shader = context->GetShader(0);
         materialPtr = context->Materials().Allocate(shader);
-
-        Matrix pspMatrix = Mat4::Perspective(cameraFOV, zNear, zFar);
-        context->Materials()[materialPtr].SetProperty("perspectiveMatrix", pspMatrix);
     }
 
     bool ShouldQuit()
@@ -72,13 +69,19 @@ namespace Egler
 
     void Frame()
     {
-        Vector4 color(0, 0, 0, 1);
-        context->Window().Clear(color, 1);
-
-        Mat4 modelMatrix = Mat4::Identity();
+        GLWindow& window = context->Window();
         Model& model = context->Models()[modelPtr];
         Material& material = context->Materials()[materialPtr];
 
+        Vector4 color(0, 0, 0, 1);
+        window.Clear(color, 1);
+
+        Vector2 windowSize = window.Size();
+        float aspect = windowSize[0] / windowSize[1];
+        Matrix pspMatrix = Mat4::Perspective(cameraFOV, zNear, zFar, aspect);
+        material.SetProperty("perspectiveMatrix", pspMatrix);
+
+        Mat4 modelMatrix = Mat4::Identity();
         modelMatrix.SetColumn(3, Vector4(0, 0, -20.0f, 1.0f));
         material.SetProperty("localToCameraMatrix", modelMatrix);
 

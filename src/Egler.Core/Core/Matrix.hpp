@@ -161,12 +161,12 @@ namespace Egler::Core
 				return Matrix<4, 4>(*this) + m;
 			}
 
-			static Mat4 Perspective(float fov, float zNear, float zFar)
+			static Mat4 Perspective(float fov, float zNear, float zFar, float aspect)
 			{
 				Mat4 matrix;
 
 				float frustum = GetFrustumScale(fov);
-				matrix.Set(0, 0, frustum);
+				matrix.Set(0, 0, frustum / aspect);
 				matrix.Set(1, 1, frustum);
 				matrix.Set(2, 2, (zFar + zNear) / (zNear - zFar));
 				matrix.Set(2, 3, -1.0f);
