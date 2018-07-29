@@ -6,11 +6,15 @@ namespace Egler::Video
 {
     Model::Model()
     {
-        vao = vbo_pos = vbo_col = ibo = 0;
+        GLuint buffers[] = { vao, vbo_pos, vbo_col, ibo };
+        glGenBuffers(4, buffers);
     }
 
-    Model::Model(VertexArray vao, VertexBuffer vbo_pos, VertexBuffer vbo_col, IndexBuffer ibo)
-    : vao(vao), vbo_pos(vbo_pos), vbo_col(vbo_col), ibo(ibo) { }
+    Model::~Model()
+    {
+        GLuint buffers[] = { vao, vbo_pos, vbo_col, ibo };
+        glDeleteBuffers(4, buffers);
+    }
 
     void Model::SetData(const ModelData& data)
     {

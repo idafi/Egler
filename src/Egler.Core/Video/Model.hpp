@@ -24,7 +24,7 @@ namespace Egler::Video
 
         public:
             Model();
-            Model(VertexArray vao, VertexBuffer vbo_pos, VertexBuffer vbo_col, IndexBuffer ibo);
+            ~Model();
 
             void SetData(const ModelData& data);
             void Draw() const;
