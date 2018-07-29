@@ -118,7 +118,8 @@ namespace Egler::Core
 			Matrix<1, rows> GetColumn(int column)
 			{
 				Matrix<1, rows> mat;
-				memcpy(mat.c, &c[i], sizeof(float) * rows);
+				int i = GetIndex(column, 0);
+				memcpy((void *)(mat.Data()), &c[i], sizeof(float) * rows);
 
 				return mat;
 			}
@@ -141,7 +142,7 @@ namespace Egler::Core
 			void SetColumn(int column, Matrix<1, rows> values)
 			{
 				int i = GetIndex(column, 0);
-				memcpy(&c[i], values.c, sizeof(float) * rows);
+				memcpy(&c[i], values.Data(), sizeof(float) * rows);
 			}
 			
 			void SetRow(int row, Matrix<1, columns> values)
