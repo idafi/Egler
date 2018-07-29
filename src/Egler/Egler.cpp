@@ -2,6 +2,7 @@
 #include "../Egler.Core/IO/IO.hpp"
 #include "../Egler.Core/Logging/Logging.hpp"
 #include "../Egler.Core/Video/Video.hpp"
+#include "../Egler.FBX/FBXImporter.hpp"
 #include "Models.hpp"
 
 using namespace Egler::Core;
@@ -10,12 +11,22 @@ using namespace Egler::Video;
 
 namespace Egler
 {
+    struct ModelBuffer
+    {
+        float VertexPositions[1204];
+        float VertexColors[1024];
+        ushort Indices[4096];
+    };
+
     static constexpr float cameraFOV = 45;
     static constexpr float zNear = 1;
     static constexpr float zFar = 45;
 
     ConsoleLogger consoleLogger;
     FileLogger fileLogger("log.txt");
+
+    FBXImporter fbxImporter;
+    ModelBuffer modelBuffer;
 
     GLContext *context;
     ModelPool::Ptr modelPtr;
@@ -50,12 +61,11 @@ namespace Egler
         context = new GLContext(data);
 
         ModelData modelData;
-        modelData.VertexPositions = modelVertices;
-        modelData.VertexColors = modelColors;
-        modelData.Indices = modelIndices;
-        modelData.VertexCount = 8;
-        modelData.IndexCount = 24;
+        modelData.VertexPositions = modelBuffer.VertexPositions;
+        modelData.VertexColors = modelBuffer.VertexColors;
+        modelData.Indices = modelBuffer.Indices;
 
+        fbxImporter.ImportModel("data/hello.fbx", &modelData);
         modelPtr = context->Models().Allocate(modelData);
 
         Shader& shader = context->GetShader(0);
