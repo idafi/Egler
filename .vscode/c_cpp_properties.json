@@ -18,6 +18,25 @@
             },
             "cStandard": "c11",
             "cppStandard": "c++17"
+        },
+        {
+            "name": "Win32",
+            "intelliSenseMode":"msvc-x64",
+            "compilerPath": "C:/Program FilesLLVM/bin/clang++.exe",
+            "includePath": [
+                "${workspaceFolder}",
+                "${workspaceFolder}/lib/SDL2-2.0.8/include",
+                "${workspaceFolder}/lib/glew-2.1.0/include",
+                "${workspaceFolder}/lib/FBX-SDK/2019.0/include"
+            ],
+            "browse": {
+                "path": [
+                    "${workspaceFolder}"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "cStandard": "c11",
+            "cppStandard": "c++17"
         }
     ],
     "version": 4
