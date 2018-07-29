@@ -22,31 +22,40 @@ namespace Egler::Video
 
     void FBXImporter::ImportModel(char const * const filePath, ModelData * const data)
     {
-        LogNote("importing FBX model...");
+        LogDebug("Importing FBX model...");
 
         CheckPtr(filePath);
         CheckPtr(data);
 
+        LogDebug("...initializing import...");
+
         if(!importer->Initialize(filePath, -1, fbxMan->GetIOSettings()))
-        { throw FBXException("FBX importer failed to initialize\n\t%s", importer->GetStatus().GetErrorString()); }
+        { throw FBXException("FBX importer failed to initialize.\n\t%s", importer->GetStatus().GetErrorString()); }
 
         scene->Clear();
         if(!importer->Import(scene))
-        { throw FBXException("Failed to import FBX scene\n\t%s", importer->GetStatus().GetErrorString()); }
+        { throw FBXException("Failed to import FBX scene.\n\t%s", importer->GetStatus().GetErrorString()); }
+
+        LogDebug("...finding mesh...");
 
         const FbxMesh * const mesh = LocateMesh(scene->GetRootNode());
         if(!mesh)
         { throw FBXException("FBX scene does not contain a mesh."); }
+
+        LogDebug("...converting units and coordinate system...");
 
         // use meter as base unit; use OpenGL coordinate system
         FbxSystemUnit::m.ConvertScene(scene);
         FbxAxisSystem sys(FbxAxisSystem::OpenGL);
         sys.ConvertScene(scene);
 
+        LogDebug("...filling mesh data...");
+
         FbxNode *node = mesh->GetNode();
         FbxAMatrix transform = node->EvaluateGlobalTransform();
-
         FillData(mesh, transform, data);
+
+        LogDebug("...done.");
     }
 
     const FbxMesh * const FBXImporter::LocateMesh(FbxNode * const node)
