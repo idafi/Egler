@@ -12,6 +12,7 @@ namespace Egler::Video
     Shader::~Shader()
     {
         glDeleteProgram(program);
+        program = 0;
     }
 
     void Shader::Compile(const ShaderSource &source)
