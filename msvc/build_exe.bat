@@ -8,7 +8,7 @@ clang++ ^
     -Wall -Wno-pragma-pack -Wno-null-dereference ^
     -I%SDL2_INC% -I%GLEW_INC% -I%FBX_INC% ^
     -o%OUT%\Egler.exe ^
-    "%SRC%\Egler\Egler.cpp" ^
+    "%SRC%\Egler\*.cpp" ^
     -llib\Egler.Core -llib\Egler.FBX ^
     -L%SDL2_LIB% -lSDL2main.lib -lSDL2.lib ^
     -L%FBX_LIB% -llibfbxsdk-mt.lib ^
