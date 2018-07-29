@@ -6,7 +6,10 @@ namespace Egler::Video
 {
     Shader::Shader()
     {
-        program = 0;
+        program = glCreateProgram();
+
+        if(program <= 0)
+        { throw FailureException("Failed to create shader program."); }
     }
 
     Shader::~Shader()
@@ -129,12 +132,6 @@ namespace Egler::Video
 
     ShaderProgram Shader::LinkProgram(const ShaderObject * const objects, const int objectCount)
     {
-        LogDebug("...creating program...");
-
-        ShaderProgram program = glCreateProgram();
-        if(program <= 0)
-        { throw FailureException("Failed to create shader program."); }
-
         LogDebug("...attaching and linking objects...");
 
         for(int i = 0; i < objectCount; i++)
