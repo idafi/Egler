@@ -27,6 +27,11 @@ ECHO ...building Egler.Core...
 CALL build_core.bat
 IF ERRORLEVEL 1 GOTO :EOF
 
+ECHO ...building Egler.FBX...
+
+CALL build_fbx.bat
+IF ERRORLEVEL 1 GOTO :EOF
+
 ECHO ...building Egler...
 
 CALL build_exe.bat
