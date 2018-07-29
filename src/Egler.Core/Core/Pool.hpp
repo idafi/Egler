@@ -19,10 +19,7 @@ namespace Egler::Core
 
             Pool()
             {
-                for(int i = 0; i < size; i++)
-                { freeIndices.push(i); }
-
-                memset(values, 0, sizeof(values));
+                Clear();
             }
 
             Pool(const T * const initValues, const int initValueCount) : Pool()
@@ -91,7 +88,11 @@ namespace Egler::Core
 
             void Clear()
             {
-                memset(values, 0, sizeof(values));
+                for(int i = 0; i < size; i++)
+                {
+                    values[i].IsAllocated = false;
+                    values[i].Revision = 1;
+                }
 
                 freeIndices = std::queue<int>();
                 for(int i = 0; i < size; i++)
