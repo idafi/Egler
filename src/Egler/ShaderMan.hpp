@@ -12,6 +12,7 @@ namespace Egler
             typedef typename Pool<Shader, Egler::MaxShaders>::Ptr Ptr;
             
             Ptr Create(EglerContext& egler, const ShaderSource& source);
+            bool Exists(const Ptr& ptr);
             void Destroy(EglerContext& egler, const Ptr& ptr);
         
         private:

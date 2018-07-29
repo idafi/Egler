@@ -13,6 +13,8 @@ namespace Egler
             
             Ptr Create(EglerContext& egler, const ModelData& modelData);
             void Destroy(EglerContext& egler, const Ptr& ptr);
+            bool Exists(const Ptr& ptr);
+            
         private:
             Pool<Model, Egler::MaxModels> models;
     };
