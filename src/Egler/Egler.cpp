@@ -18,6 +18,10 @@ namespace Egler
         ushort Indices[4096];
     };
 
+    const char * const vertFile = "data/shader.vert";
+    const char * const fragFile = "data/shader.frag";
+    const char * const fbxFile = "data/hello.fbx";
+
     static constexpr float cameraFOV = 45;
     static constexpr float zNear = 1;
     static constexpr float zFar = 45;
@@ -45,15 +49,10 @@ namespace Egler
         const char * const windowName = "Egler";
         const PixelRect windowRect(GLWindow::Centered, GLWindow::Centered, 640, 480);
 
-        // build shaders
-        const char * const vertFilename = "data/shader.vert";
-        const char * const fragFilename = "data/shader.frag";
-
-        std::string vertStr = IO::ReadAllText(vertFilename);
-        std::string fragStr = IO::ReadAllText(fragFilename);
-        
-        ShaderSourceFile vert(vertStr.c_str(), ShaderType::Vertex, vertFilename);
-        ShaderSourceFile frag(fragStr.c_str(), ShaderType::Fragment, fragFilename);
+        std::string vertStr = IO::ReadAllText(vertFile);
+        std::string fragStr = IO::ReadAllText(fragFile);
+        ShaderSourceFile vert(vertStr.c_str(), ShaderType::Vertex, vertFile);
+        ShaderSourceFile frag(fragStr.c_str(), ShaderType::Fragment, fragFile);
         ShaderSourceFile files[] = { vert, frag };
         ShaderSource shaders[] = { ShaderSource(files, 2) };
 
@@ -65,7 +64,7 @@ namespace Egler
         modelData.VertexColors = modelBuffer.VertexColors;
         modelData.Indices = modelBuffer.Indices;
 
-        fbxImporter.ImportModel("data/hello.fbx", &modelData);
+        fbxImporter.ImportModel(fbxFile, &modelData);
         modelPtr = context->Models().Allocate(modelData);
 
         Shader& shader = context->GetShader(0);
