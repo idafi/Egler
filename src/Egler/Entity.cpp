@@ -21,9 +21,9 @@ namespace Egler::Video
 
     void Entity::SetScale(const Vector3& scale)
     {
-        TRSMatrix.Set(0, 0, scale.Get(0, 0));
-        TRSMatrix.Set(1, 1, scale.Get(1, 1));
-        TRSMatrix.Set(2, 2, scale.Get(2, 2));
+        TRSMatrix.Set(0, 0, scale[0]);
+        TRSMatrix.Set(1, 1, scale[1]);
+        TRSMatrix.Set(2, 2, scale[2]);
     }
 
     void Entity::Translate(const Vector3& translation)
