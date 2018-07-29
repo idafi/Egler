@@ -4,5 +4,5 @@
 
 namespace Egler::IO
 {
-    std::string ReadAllText(char const * const fileName);
+    std::string EGAPI ReadAllText(char const * const fileName);
 }

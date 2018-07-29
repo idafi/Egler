@@ -13,9 +13,9 @@ namespace Egler::Core
     #define SDLException(msg, ...) \
         FailureException(msg "\n\tSDL error: %s", ##__VA_ARGS__, SDL_GetError())
     
-    void Init();
-    bool ShouldQuit();
-    void Quit();
+    void EGAPI Init();
+    bool EGAPI ShouldQuit();
+    void EGAPI Quit();
 
-    void Delay(uint ms);
+    void EGAPI Delay(uint ms);
 }

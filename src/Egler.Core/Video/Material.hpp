@@ -5,7 +5,7 @@
 
 namespace Egler::Video
 {
-    struct MaterialProperties
+    struct EGAPI MaterialProperties
     {
         std::map<const char *, float> f1;
         std::map<const char *, Vector2> f2;
@@ -39,7 +39,7 @@ namespace Egler::Video
         }
     };
 
-    class Material
+    class EGAPI Material
     {
         public:
             ~Material();

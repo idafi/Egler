@@ -6,7 +6,7 @@
 
 namespace Egler
 {
-    class EglerException : public std::exception
+    class EGAPI EglerException : public std::exception
     {
         #define MAX_MSG_LENGTH 512
 
@@ -37,7 +37,7 @@ namespace Egler
 
     // HACK: this sucks
     #define _DefineException(name) \
-        class name : public EglerException \
+        class EGAPI name : public EglerException \
         { \
             public: \
                 name(const char *msg, ...) \

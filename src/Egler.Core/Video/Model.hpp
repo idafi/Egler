@@ -4,7 +4,7 @@
 
 namespace Egler::Video
 {
-    struct ModelData
+    struct EGAPI ModelData
     {
         const float *VertexPositions;
         const float *VertexColors;
@@ -14,7 +14,7 @@ namespace Egler::Video
         int IndexCount;
     };
 
-    class Model
+    class EGAPI Model
     {
         enum class VertexAttr
         {

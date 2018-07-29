@@ -17,7 +17,7 @@ namespace Egler::Core
 		Yellow
 	};
 
-	class Console
+	class EGAPI Console
 	{
 		public:
 			Console();

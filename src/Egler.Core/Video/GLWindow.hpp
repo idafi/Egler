@@ -4,7 +4,7 @@
 
 namespace Egler::Video
 {
-	class GLWindow
+	class EGAPI GLWindow
 	{
 		public:
 			// SDL magic

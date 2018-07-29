@@ -10,7 +10,7 @@
 
 namespace Egler::Logging
 {
-	class Log
+	class EGAPI Log
 	{
 		public:
 			static void AddDefaultLogger(ILogger * const logger, const LogLevel minLevel);

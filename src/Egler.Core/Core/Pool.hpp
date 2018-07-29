@@ -6,7 +6,7 @@
 namespace Egler::Core
 {
     template<typename T, int size>
-    class Pool
+    class EGAPI Pool
     {
         public:
             struct Ptr

@@ -4,7 +4,7 @@
 
 namespace Egler::Video
 {
-    struct GLContextData
+    struct EGAPI GLContextData
     {
         const char * const WindowName;
         const PixelRect WindowDimensions;
@@ -18,7 +18,7 @@ namespace Egler::Video
         { }
     };
 
-    class GLContext
+    class EGAPI GLContext
     {
         public:
             GLContext(const GLContextData& contextData);

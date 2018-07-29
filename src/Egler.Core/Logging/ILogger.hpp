@@ -8,7 +8,7 @@
 
 namespace Egler::Logging
 {
-	class ILogger
+	class EGAPI ILogger
 	{
 		public:
 			virtual ~ILogger() { }

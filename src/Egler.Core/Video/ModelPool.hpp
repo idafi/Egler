@@ -4,7 +4,7 @@
 
 namespace Egler::Video
 {
-	class ModelPool
+	class EGAPI ModelPool
 	{
 		public:
 			typedef typename Pool<Model, MaxModels>::Ptr Ptr;

@@ -9,7 +9,7 @@
 namespace Egler::Core
 {
 	template<int columns, int rows>
-	struct Matrix
+	struct EGAPI Matrix
 	{
 		public:
 			static constexpr int Size = columns * rows;

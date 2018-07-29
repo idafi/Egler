@@ -4,7 +4,7 @@
 
 namespace Egler::Video
 {
-    class MaterialPool
+    class EGAPI MaterialPool
     {
         public:
             typedef typename Pool<Material, MaxMaterials>::Ptr Ptr;

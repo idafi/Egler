@@ -9,7 +9,7 @@
 namespace Egler::Core
 {
 	template<int size>
-	struct Vector : public Matrix<1, size>
+	struct EGAPI Vector : public Matrix<1, size>
 	{
 		public:
 			static constexpr int Size = size;

@@ -6,7 +6,7 @@
 
 namespace Egler::Video
 {
-    struct PixelRect
+    struct EGAPI PixelRect
     {
         int X, Y, Width, Height;
         

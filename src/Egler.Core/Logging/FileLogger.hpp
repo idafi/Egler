@@ -9,7 +9,7 @@
 
 namespace Egler::Logging
 {
-	class FileLogger : public ILogger
+	class EGAPI FileLogger : public ILogger
 	{
 		public:
 			FileLogger(const char * const filePath);

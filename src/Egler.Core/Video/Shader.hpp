@@ -19,7 +19,7 @@ namespace Egler::Video
         TessEval = GL_TESS_EVALUATION_SHADER
     };
 
-    struct ShaderSourceFile
+    struct EGAPI ShaderSourceFile
     {
         const char * const Source;
         const ShaderType Type;
@@ -34,7 +34,7 @@ namespace Egler::Video
         }
     };
 
-    struct ShaderSource
+    struct EGAPI ShaderSource
     {
         const ShaderSourceFile * const SourceFiles;
         const int SourceFileCount;
@@ -56,13 +56,13 @@ namespace Egler::Video
         M4 = GL_FLOAT_MAT4
     };
 
-    struct ShaderUniform
+    struct EGAPI ShaderUniform
     {
         char Name[32];
         ShaderUniformType Type;
     };
 
-    class Shader
+    class EGAPI Shader
     {
         public:
             Shader();

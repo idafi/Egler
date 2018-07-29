@@ -12,6 +12,7 @@
 #include <memory>
 
 #define intern static
+#define EGAPI __declspec(dllexport)
 
 namespace Egler
 {
@@ -22,7 +23,9 @@ namespace Egler
     typedef uint64_t ulong;
 }
 
+#ifndef M_PI
 #define M_PI 3.14159265358979323846
+#endif
 
 #define Min(a, b) (((a) < (b)) ? (a) : (b))
 #define Max(a, b) (((a) > (b)) ? (a) : (b))
