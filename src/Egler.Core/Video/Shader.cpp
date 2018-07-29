@@ -53,7 +53,7 @@ namespace Egler::Video
         glGetActiveUniform(program, index, 32, &len, &lenlen, &type, name);
         
         ShaderUniform uniform;
-        strcpy(uniform.Name, name);
+        strcpy_s(uniform.Name, name);
         uniform.Type = (ShaderUniformType)(type);
         return uniform;
     }
