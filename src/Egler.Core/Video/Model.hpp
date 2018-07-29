@@ -6,11 +6,11 @@ namespace Egler::Video
 {
     struct EGAPI ModelData
     {
-        const float *VertexPositions;
-        const float *VertexColors;
+        float *VertexPositions;
+        float *VertexColors;
         int VertexCount;
         
-        const ushort *Indices;
+        ushort *Indices;
         int IndexCount;
     };
 
