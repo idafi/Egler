@@ -32,6 +32,14 @@ namespace Egler::Core
                 { values[i].Item = initValues[i]; }
             }
 
+            T& operator [](const int index)
+            {
+                if(!IsAllocated(index))
+                { throw OutOfRangeException("Index %i is invalid or not allocated", index); }
+
+                return values[index].Item;
+            }
+
             T& operator [](const Ptr& ptr)
             {
                 if(!IsAllocated(ptr))
@@ -75,13 +83,21 @@ namespace Egler::Core
                 }
             }
 
+            bool IsAllocated(const int index)
+            {
+                if(index > -1 && index < size)
+                {
+                    if(values[index].IsAllocated)
+                    { return true; }
+                }
+
+                return false;
+            }
+
             bool IsAllocated(const Ptr& ptr)
             {
-                if(ptr.Index > -1 && ptr.Index < size)
-                {
-                    if(values[ptr.Index].IsAllocated)
-                    { return (ptr.Revision == values[ptr.Index].Revision); }
-                }
+                if(IsAllocated(ptr.Index))
+                { return (ptr.Revision == values[ptr.Index].Revision); }
 
                 return false;
             }
