@@ -9,6 +9,10 @@ namespace Egler
     class EglerContext
     {
         public:
+            EglerContext() { }
+            EglerContext(const char * const windowName, const PixelRect& windowDim)
+            : window(GLWindow(windowName, windowDim)) { }
+
             GLWindow& Window()
             { return window; }
             ShaderMan& Shaders()
