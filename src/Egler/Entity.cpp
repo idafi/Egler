@@ -1,6 +1,6 @@
 #include "Entity.hpp"
 
-namespace Egler::Video
+namespace Egler
 {
     Vector3 Entity::GetPosition()
     {

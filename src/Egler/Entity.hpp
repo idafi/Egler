@@ -2,12 +2,12 @@
 
 #include "../Egler.Core/Video/Video.hpp"
 
-namespace Egler::Video
+namespace Egler
 {
     struct Entity
     {
-        ModelPool::Ptr Model;
-        MaterialPool::Ptr Material;
+        ModelMan::Ptr Model;
+        MaterialMan::Ptr Material;
         Mat4 TRSMatrix;
 
         Vector3 GetPosition();
