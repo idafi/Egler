@@ -1,6 +1,28 @@
 {
     "configurations": [
         {
+            "name": "MSVC",
+            "intelliSenseMode": "msvc-x64",
+            "compilerPath": "C:/Program Files/LLVM/bin/clang++.exe",
+            "includePath": [
+                "${workspaceFolder}",
+                "${workspaceFolder}/msvc/lib/SDL2-2.0.8/include",
+                "${workspaceFolder}/msvc/lib/glew-2.1.0/include",
+                "${workspaceFolder}/msvc/lib/FBX-SDK/2019.0/include"
+            ],
+            "browse": {
+                "path": [
+                    "${workspaceFolder}",
+                    "${workspaceFolder}/msvc/lib/SDL2-2.0.8/include",
+                    "${workspaceFolder}/msvc/lib/glew-2.1.0/include",
+                    "${workspaceFolder}/msvc/lib/FBX-SDK/2019.0/include"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "cStandard": "c11",
+            "cppStandard": "c++17"
+        },
+        {
             "name": "MinGW",
             "intelliSenseMode": "clang-x64",
             "compilerPath": "C:/msys64/mingw64/bin/clang++.exe",
@@ -15,25 +37,6 @@
                 ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
-            },
-            "cStandard": "c11",
-            "cppStandard": "c++17"
-        },
-        {
-            "name": "Win32",
-            "intelliSenseMode":"msvc-x64",
-            "compilerPath": "C:/Program FilesLLVM/bin/clang++.exe",
-            "includePath": [
-                "${workspaceFolder}",
-                "${workspaceFolder}/lib/SDL2-2.0.8/include",
-                "${workspaceFolder}/lib/glew-2.1.0/include",
-                "${workspaceFolder}/lib/FBX-SDK/2019.0/include"
-            ],
-            "browse": {
-                "path": [
-                    "${workspaceFolder}"
-                ],
-                "limitSymbolsToIncludedHeaders": true
             },
             "cStandard": "c11",
             "cppStandard": "c++17"
