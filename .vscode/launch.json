@@ -5,10 +5,21 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug Egler",
+            "name": "Debug Egler (MSVC)",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/msvc/bin/Egler.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/msvc/bin/",
+            "environment": [],
+            "externalConsole": true
+        },
+        {
+            "name": "Debug Egler (MinGW)",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/bin/Egler.exe",
+            "program": "${workspaceFolder}/mingw/bin/Egler.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
