@@ -13,6 +13,7 @@ namespace Egler
             
             Ptr Create(EglerContext& egler, const ShaderMan::Ptr& shader);
             bool Exists(const Ptr& ptr);
+            Material& Get(const Ptr& ptr);
             void Destroy(EglerContext& egler, const Ptr& ptr);
         
         private:

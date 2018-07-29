@@ -19,6 +19,14 @@ namespace Egler
         return shaders.IsAllocated(ptr);
     }
 
+    Shader& ShaderMan::Get(const Ptr& ptr)
+    {
+        if(!Exists(ptr))
+        { throw BadArgumentException("Provided shader does not exist."); }
+
+        return shaders[ptr];
+    }
+
     void ShaderMan::Destroy(EglerContext& egler, const Ptr& ptr)
     {
         shaders.Free(ptr);

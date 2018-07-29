@@ -11,7 +11,7 @@ namespace Egler
 
         Ptr ptr = materials.Allocate();
         Material& mat = materials[ptr];
-        Shader& s = egler.Shaders[shader];
+        Shader& s = egler.Shaders().Get(shader);
         mat.SetShader(s);
 
         return ptr;
@@ -20,6 +20,14 @@ namespace Egler
     bool MaterialMan::Exists(const Ptr& ptr)
     {
         return materials.IsAllocated(ptr);
+    }
+
+    Material& MaterialMan::Get(const Ptr& ptr)
+    {
+        if(!Exists(ptr))
+        { throw BadArgumentException("Provided material does not exist."); }
+
+        return materials[ptr];
     }
 
     void MaterialMan::Destroy(EglerContext& egler, const Ptr& ptr)

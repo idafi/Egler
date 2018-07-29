@@ -30,6 +30,14 @@ namespace Egler
         return entities.IsAllocated(ptr);
     }
 
+    Entity& EntityMan::Get(const Ptr& ptr)
+    {
+        if(!Exists(ptr))
+        { throw BadArgumentException("Provided entity does not exist."); }
+
+        return entities[ptr];
+    }
+
     void EntityMan::Update(EglerContext& egler)
     {
         
