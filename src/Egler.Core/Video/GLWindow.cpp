@@ -22,7 +22,7 @@ namespace Egler::Video
 
         window = SDL_CreateWindow(name,
             dimensions.X, dimensions.Y, dimensions.Width, dimensions.Height,
-            SDL_WINDOW_OPENGL
+            SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE
         );
 
         if(!window)
@@ -93,7 +93,9 @@ namespace Egler::Video
     {
         if(!IsCurrent())
         { throw NotInitializedException("GL window to clear is not of the current GL context (%i).", context); }
-        
+
+        const Vector2 size = Size();
+        glViewport(0, 0, size[0], size[1]);
         SDL_GL_SwapWindow(window);
     }
 
