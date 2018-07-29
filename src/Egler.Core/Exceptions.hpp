@@ -54,5 +54,6 @@ namespace Egler
     _DefineException(OutOfRangeException)
     _DefineException(InvalidOperationException)
     _DefineException(NotInitializedException)
+    _DefineException(OutOfMemoryException)
     _DefineException(FailureException)
 }
