@@ -115,7 +115,7 @@ namespace Egler::Core
 				return c[i];
 			}
 
-			Matrix<1, rows> GetColumn(int column)
+			Matrix<1, rows> GetColumn(int column) const
 			{
 				Matrix<1, rows> mat;
 				for(int i = 0; i < rows; i++)
@@ -124,7 +124,7 @@ namespace Egler::Core
 				return mat;
 			}
 
-			Matrix<1, columns> GetRow(int row)
+			Matrix<1, columns> GetRow(int row) const
 			{
 				Matrix<1, columns> mat;
 				for(int i = 0; i < columns; i++)
