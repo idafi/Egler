@@ -64,6 +64,9 @@ namespace Egler
         auto shader = egler->Shaders().Create(*egler, shaderSrc);
         auto material = egler->Materials().Create(*egler, shader);
         entity = egler->Entities().Create(*egler, model, material);
+        
+        Entity& ent = egler->Entities().Get(entity);
+        ent.SetPosition(Vector3(0, 0, -20));
     }
 
     bool ShouldQuit()
