@@ -6,6 +6,7 @@
 #include "Console.hpp"
 #include "Matrix.hpp"
 #include "Vector.hpp"
+#include "Quaternion.hpp"
 #include "Pool.hpp"
 
 namespace Egler::Core
