@@ -30,6 +30,7 @@ namespace Egler::Core
             float& W();
 
             Vector3 ToEuler() const;
+            Mat4 ToMatrix() const;
 
         private:
             float c[4];

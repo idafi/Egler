@@ -123,4 +123,19 @@ namespace Egler::Core
 
         return Vector3(Rad2Deg(yaw), Rad2Deg(pitch), Rad2Deg(roll));
     }
+
+    Mat4 Quaternion::ToMatrix() const
+    {
+        float x = X();
+        float y = Y();
+        float z = Z();
+        float w = W();
+
+        Mat4 mat = Mat4::Identity();
+        mat[0] -= (2 * y * y) - (2 * z * z);    mat[4] = (2 * x * y) - (2 * w * z);     mat[8] = (2 * x * z) + (2 * w * y);
+        mat[1] = (2 * x * y) + (2 * w * z);     mat[5] -= (2 * x * x) - (2 * z * z);    mat[9] = (2 * y * z) - (2 * w * x);
+        mat[2] = (2 * x * z) - (2 * w * y);     mat[6] = (2 * y * z) + (2 * w * x);     mat[10] -= (2 * x * x) - (2 * y * y);
+
+        return mat;
+    }
 }
