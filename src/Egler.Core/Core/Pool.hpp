@@ -115,6 +115,33 @@ namespace Egler::Core
                 { freeIndices.push(i); }
             }
 
+            struct Iterator
+            {
+                Pool<T, size>& pool;
+                int Index;
+
+                Iterator(Pool<T, size>& pool) : pool(pool) { Index = GetNext(-1); }
+                T& operator *() { return pool.values[Index].Item; }
+                bool operator !=(int i) { return (Index != i); }
+
+                Iterator& operator ++()
+                {
+                    Index = GetNext(Index);
+                    return *this;
+                }
+
+                int GetNext(int current)
+                {
+                    do { current++; }
+                    while(current < pool.Capacity() && !pool.values[current].IsAllocated);
+
+                    return current;
+                }
+            };
+
+            Iterator begin() { return Iterator(*this); }
+            int end() { return Capacity(); }
+
         private:
             struct Value
             {

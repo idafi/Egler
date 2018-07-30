@@ -88,4 +88,28 @@ namespace Egler::Core
         ASSERT_FALSE(pool.IsAllocated(ptrA));
         ASSERT_FALSE(pool.IsAllocated(ptrB));
     }
+
+    TEST_F(PoolTest, TestRangeItr)
+    {
+        auto ptrA = pool.Allocate();
+        auto ptrB = pool.Allocate();
+        auto ptrC = pool.Allocate();
+        
+        pool[ptrA] = 666;
+        pool.Free(ptrB);
+        pool[ptrC] = 69;
+
+        int ct = 0;
+        for(auto& i : pool)
+        {
+            if(ct == 0)
+            { ASSERT_EQ(666, i); }
+            else if(ct == 1)
+            { ASSERT_EQ(69, i); }
+
+            ct++;
+        }
+
+        ASSERT_EQ(2, ct);
+    }
 }
