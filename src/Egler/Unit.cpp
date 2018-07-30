@@ -10,7 +10,7 @@ namespace Egler
 
     void Unit::SetPosition(const Vector3& position)
     {
-        TRSMatrix.SetColumn(3, Vector4(position[0], position[1], position[2], 1));
+        TRSMatrix.SetColumn(3, Vector4(position.X(), position.Y(), position.Z(), 1));
     }
 
     Vector3 Unit::GetScale()
@@ -21,9 +21,9 @@ namespace Egler
 
     void Unit::SetScale(const Vector3& scale)
     {
-        TRSMatrix.Set(0, 0, scale[0]);
-        TRSMatrix.Set(1, 1, scale[1]);
-        TRSMatrix.Set(2, 2, scale[2]);
+        TRSMatrix.Set(0, 0, scale.X());
+        TRSMatrix.Set(1, 1, scale.Y());
+        TRSMatrix.Set(2, 2, scale.Z());
     }
 
     void Unit::Translate(const Vector3& translation)
