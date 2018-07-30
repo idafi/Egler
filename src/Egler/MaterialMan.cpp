@@ -1,5 +1,3 @@
-#pragma once
-
 #include "Egler.hpp"
 
 namespace Egler
