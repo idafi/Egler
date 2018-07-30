@@ -65,6 +65,8 @@ namespace Egler::Video
     class EGAPI Shader
     {
         public:
+            static constexpr int MaxSourceFiles = 8;
+
             Shader();
             ~Shader();
 
@@ -82,6 +84,7 @@ namespace Egler::Video
 
         private:
             ShaderProgram program;
+            ShaderObject objects[MaxSourceFiles];
 
             ShaderObject CompileObject(const ShaderSourceFile& source);
             ShaderProgram LinkProgram(const ShaderObject * const, const int objectCount);

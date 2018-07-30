@@ -24,12 +24,11 @@ namespace Egler::Video
 
         LogDebug("...compiling source...");
 
-        std::unique_ptr<ShaderObject[]> objects(new ShaderObject[source.SourceFileCount]);
         for(int i = 0; i < source.SourceFileCount; i++)
         { objects[i] = CompileObject(source.SourceFiles[i]); }
 
         LogDebug("...linking program...");
-        program = LinkProgram(objects.get(), source.SourceFileCount);
+        program = LinkProgram(objects, source.SourceFileCount);
 
         LogDebug("...done.");
     }
