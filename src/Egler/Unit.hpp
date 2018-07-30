@@ -4,10 +4,10 @@
 
 namespace Egler
 {
-    struct Entity
+    struct Unit
     {
-        ModelMan::Ptr Model;
-        MaterialMan::Ptr Material;
+        ModelSystem::Ptr Model;
+        MaterialSystem::Ptr Material;
         Mat4 TRSMatrix;
 
         Vector3 GetPosition();

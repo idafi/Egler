@@ -30,7 +30,7 @@ namespace Egler
     ModelBuffer modelBuffer;
 
     EglerContext *egler;
-    EntityMan::Ptr entity;
+    UnitPtr unit;
 
     void Init()
     {
@@ -60,13 +60,13 @@ namespace Egler
 
         egler = new EglerContext(windowName, windowRect);
         
-        auto model = egler->Models().Create(*egler, modelData);
-        auto shader = egler->Shaders().Create(*egler, shaderSrc);
-        auto material = egler->Materials().Create(*egler, shader);
-        entity = egler->Entities().Create(*egler, model, material);
+        ModelPtr model = egler->Models().Create(*egler, modelData);
+        ShaderPtr shader = egler->Shaders().Create(*egler, shaderSrc);
+        MaterialPtr material = egler->Materials().Create(*egler, shader);
+        unit = egler->Units().Create(*egler, model, material);
         
-        Entity& ent = egler->Entities().Get(entity);
-        ent.SetPosition(Vector3(0, 0, -20));
+        Unit& u = egler->Units().Get(unit);
+        u.SetPosition(Vector3(0, 0, -20));
     }
 
     bool ShouldQuit()
@@ -80,7 +80,7 @@ namespace Egler
         Vector4 color(0, 0, 0, 1);
         window.Clear(color, 1);
 
-        egler->Entities().Update(*egler);
+        egler->Units().Update(*egler);
 
         egler->Window().Present();
         Core::Delay(16);

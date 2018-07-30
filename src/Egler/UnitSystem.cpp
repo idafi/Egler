@@ -2,43 +2,24 @@
 
 namespace Egler
 {
-    EntityMan::Ptr EntityMan::Create(EglerContext& egler, const ModelMan::Ptr& model, const MaterialMan::Ptr& material)
+    UnitSystem::Ptr UnitSystem::Create(EglerContext& egler, const ModelPtr& model, const MaterialPtr& material)
     {
-        if(entities.Count() >= entities.Capacity())
-        { throw OutOfMemoryException("Entity pool is full (%s values).", entities.Capacity()); }
         if(!egler.Models().Exists(model))
         { throw BadArgumentException("Provided model does not exist."); }
         if(!egler.Materials().Exists(material))
         { throw BadArgumentException("Provided material does not exist."); }
 
-        Ptr ptr = entities.Allocate();
-        Entity& ent = entities[ptr];
-        ent.Model = model;
-        ent.Material = material;
-        ent.TRSMatrix = Mat4::Identity();
+        Ptr ptr = Allocate();
+        Unit& u = Get(ptr);
+
+        u.Model = model;
+        u.Material = material;
+        u.TRSMatrix = Mat4::Identity();
 
         return ptr;
     }
-
-    void EntityMan::Destroy(EglerContext& egler, const EntityMan::Ptr& ptr)
-    {
-        entities.Free(ptr);
-    }
-
-    bool EntityMan::Exists(const Ptr& ptr)
-    {
-        return entities.IsAllocated(ptr);
-    }
-
-    Entity& EntityMan::Get(const Ptr& ptr)
-    {
-        if(!Exists(ptr))
-        { throw BadArgumentException("Provided entity does not exist."); }
-
-        return entities[ptr];
-    }
-
-    void EntityMan::Update(EglerContext& egler)
+    
+    void UnitSystem::Update(EglerContext& egler)
     {
         // this doesn't belong here
         static constexpr float cameraFOV = 45;
@@ -52,14 +33,14 @@ namespace Egler
 
         const byte * const keys = SDL_GetKeyboardState(nullptr);
 
-        for(int i = 0; i < entities.Capacity(); i++)
+        for(int i = 0; i < pool.Capacity(); i++)
         {
-            if(!entities.IsAllocated(i))
+            if(!pool.IsAllocated(i))
             { continue; }
 
-            Entity& ent = entities[i];
-            Model& model = egler.Models().Get(ent.Model);
-            Material& material = egler.Materials().Get(ent.Material);
+            Unit& u = pool[i];
+            Model& model = egler.Models().Get(u.Model);
+            Material& material = egler.Materials().Get(u.Material);
 
             Vector3 translate;
             if(keys[SDL_SCANCODE_RIGHT])
@@ -71,7 +52,7 @@ namespace Egler
             if(keys[SDL_SCANCODE_DOWN])
             { translate[1] -= 0.1f; }
 
-            Vector3 scale = ent.GetScale();
+            Vector3 scale = u.GetScale();
             if(keys[SDL_SCANCODE_D])
             { scale[0] += 0.1f; }
             if(keys[SDL_SCANCODE_A])
@@ -81,11 +62,11 @@ namespace Egler
             if(keys[SDL_SCANCODE_S])
             { scale[1] -= 0.1f; }
 
-            ent.Translate(translate.ClampMagnitude(0, 1));
-            ent.SetScale(scale);
+            u.Translate(translate.ClampMagnitude(0, 1));
+            u.SetScale(scale);
 
             material.SetProperty("perspectiveMatrix", pspMatrix);
-            material.SetProperty("localToCameraMatrix", ent.TRSMatrix);
+            material.SetProperty("localToCameraMatrix", u.TRSMatrix);
             egler.Window().DrawModel(model, material);
         }
     }

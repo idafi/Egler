@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../Egler.Core/Common.hpp"
 #include "../Egler.Core/Core/Core.hpp"
 #include "../Egler.Core/IO/IO.hpp"
 #include "../Egler.Core/Logging/Logging.hpp"
@@ -13,12 +14,13 @@ namespace Egler
 	static constexpr int MaxModels = 64;
 	static constexpr int MaxShaders = 64;
 	static constexpr int MaxMaterials = 96;
-	static constexpr int MaxEntities = 16;
+	static constexpr int MaxUnits = 16;
 }
 
-#include "ModelMan.hpp"
-#include "ShaderMan.hpp"
-#include "MaterialMan.hpp"
-#include "Entity.hpp"
-#include "EntityMan.hpp"
+#include "EntitySystem.hpp"
+#include "ModelSystem.hpp"
+#include "ShaderSystem.hpp"
+#include "MaterialSystem.hpp"
+#include "Unit.hpp"
+#include "UnitSystem.hpp"
 #include "EglerContext.hpp"

@@ -15,21 +15,21 @@ namespace Egler
 
             GLWindow& Window()
             { return window; }
-            ShaderMan& Shaders()
+            ShaderSystem& Shaders()
             { return shaders; }
-            ModelMan& Models()
+            ModelSystem& Models()
             { return models; }
-            MaterialMan& Materials()
+            MaterialSystem& Materials()
             { return materials; }
-            EntityMan& Entities()
-            { return entities; }
+            UnitSystem& Units()
+            { return units; }
         
         private:
             GLWindow window;
             
-            ShaderMan shaders;
-            ModelMan models;
-            MaterialMan materials;
-            EntityMan entities;
+            ShaderSystem shaders;
+            ModelSystem models;
+            MaterialSystem materials;
+            UnitSystem units;
     };
 }
