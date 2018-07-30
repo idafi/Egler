@@ -66,7 +66,7 @@ namespace Egler
         unit = egler->Units().Create(*egler, model, material);
         
         Unit& u = egler->Units().Get(unit);
-        u.SetPosition(Vector3(0, 0, -20));
+        u.Position.Z() = -20;
     }
 
     bool ShouldQuit()
