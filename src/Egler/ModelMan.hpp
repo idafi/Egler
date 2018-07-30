@@ -13,6 +13,7 @@ namespace Egler
             
             Ptr Create(EglerContext& egler, const ModelData& modelData);
             void Destroy(EglerContext& egler, const Ptr& ptr);
+            
             Model& Get(const Ptr& ptr);
             bool Exists(const Ptr& ptr);
             

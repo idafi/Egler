@@ -15,6 +15,11 @@ namespace Egler
         return ptr;
     }
 
+    void MaterialMan::Destroy(EglerContext& egler, const Ptr& ptr)
+    {
+        materials.Free(ptr);
+    }
+
     bool MaterialMan::Exists(const Ptr& ptr)
     {
         return materials.IsAllocated(ptr);
@@ -26,10 +31,5 @@ namespace Egler
         { throw BadArgumentException("Provided material does not exist."); }
 
         return materials[ptr];
-    }
-
-    void MaterialMan::Destroy(EglerContext& egler, const Ptr& ptr)
-    {
-        materials.Free(ptr);
     }
 }

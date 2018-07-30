@@ -12,9 +12,10 @@ namespace Egler
             typedef typename Pool<Material, Egler::MaxMaterials>::Ptr Ptr;
             
             Ptr Create(EglerContext& egler, const ShaderMan::Ptr& shader);
+            void Destroy(EglerContext& egler, const Ptr& ptr);
+
             bool Exists(const Ptr& ptr);
             Material& Get(const Ptr& ptr);
-            void Destroy(EglerContext& egler, const Ptr& ptr);
         
         private:
             Pool<Material, Egler::MaxMaterials> materials;

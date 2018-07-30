@@ -13,8 +13,10 @@ namespace Egler
             
             Ptr Create(EglerContext& egler, const ModelMan::Ptr& model, const MaterialMan::Ptr& material);
             void Destroy(EglerContext& egler, const Ptr& ptr);
+
             bool Exists(const Ptr& ptr);
             Entity& Get(const Ptr& ptr);
+            
             void Update(EglerContext& egler);
         
         private:

@@ -2,7 +2,7 @@
 
 namespace Egler
 {
-    ShaderMan::Ptr ShaderMan::Create(EglerContext& egler, const ShaderSource &source)
+    ShaderMan::Ptr ShaderMan::Create(EglerContext& egler, const ShaderSource& source)
     {
         if(shaders.Count() >= shaders.Capacity())
         { throw OutOfMemoryException("Shader pool is full (%s values).", shaders.Capacity()); }
@@ -12,6 +12,11 @@ namespace Egler
         shader.Compile(source);
 
         return ptr;
+    }
+
+    void ShaderMan::Destroy(EglerContext& egler, const Ptr& ptr)
+    {
+        shaders.Free(ptr);
     }
 
     bool ShaderMan::Exists(const Ptr& ptr)
@@ -25,10 +30,5 @@ namespace Egler
         { throw BadArgumentException("Provided shader does not exist."); }
 
         return shaders[ptr];
-    }
-
-    void ShaderMan::Destroy(EglerContext& egler, const Ptr& ptr)
-    {
-        shaders.Free(ptr);
     }
 }

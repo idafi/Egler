@@ -7,17 +7,18 @@
 
 namespace Egler
 {
-	static constexpr int MaxShaders = 64;
+	// the context holds everything we're about to include, so a forward declaration is needed
+	class EglerContext;
+
 	static constexpr int MaxModels = 64;
+	static constexpr int MaxShaders = 64;
 	static constexpr int MaxMaterials = 96;
 	static constexpr int MaxEntities = 16;
-
-	class EglerContext;
 }
 
+#include "ModelMan.hpp"
 #include "ShaderMan.hpp"
 #include "MaterialMan.hpp"
-#include "ModelMan.hpp"
 #include "Entity.hpp"
 #include "EntityMan.hpp"
 #include "EglerContext.hpp"

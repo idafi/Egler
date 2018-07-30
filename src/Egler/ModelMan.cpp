@@ -14,6 +14,11 @@ namespace Egler
         return ptr;
     }
 
+    void ModelMan::Destroy(EglerContext& egler, const Ptr& ptr)
+    {
+        models.Free(ptr);
+    }
+
     bool ModelMan::Exists(const Ptr& ptr)
     {
         return models.IsAllocated(ptr);
@@ -25,10 +30,5 @@ namespace Egler
         { throw BadArgumentException("Provided model does not exist."); }
 
         return models[ptr];
-    }
-
-    void ModelMan::Destroy(EglerContext& egler, const Ptr& ptr)
-    {
-        models.Free(ptr);
     }
 }
