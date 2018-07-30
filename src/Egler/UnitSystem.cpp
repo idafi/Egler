@@ -14,7 +14,9 @@ namespace Egler
 
         u.Model = model;
         u.Material = material;
-        u.TRSMatrix = Mat4::Identity();
+        u.Position = Vector3(0, 0, 0);
+        u.Rotation = Quaternion::Identity();
+        u.Scale = Vector3(1, 1, 1);
 
         return ptr;
     }
@@ -44,29 +46,40 @@ namespace Egler
 
             Vector3 translate;
             if(keys[SDL_SCANCODE_RIGHT])
-            { translate[0] += 0.1f; }
+            { translate.X() += 0.1f; }
             if(keys[SDL_SCANCODE_LEFT])
-            { translate[0] -= 0.1f; }
+            { translate.X() -= 0.1f; }
             if(keys[SDL_SCANCODE_UP])
-            { translate[1] += 0.1f; }
+            { translate.Y() += 0.1f; }
             if(keys[SDL_SCANCODE_DOWN])
-            { translate[1] -= 0.1f; }
+            { translate.Y() -= 0.1f; }
 
-            Vector3 scale = u.GetScale();
+            Vector3 rotate;
+            if(keys[SDL_SCANCODE_E])
+            { rotate.X() += 1; }
+            if(keys[SDL_SCANCODE_Q])
+            { rotate.X() -= 1; }
+            if(keys[SDL_SCANCODE_T])
+            { rotate.Y() += 1; }
+            if(keys[SDL_SCANCODE_G])
+            { rotate.Y() -= 1; }
+
+            Vector3 scale = u.Scale;
             if(keys[SDL_SCANCODE_D])
-            { scale[0] += 0.1f; }
+            { scale.X() += 0.1f; }
             if(keys[SDL_SCANCODE_A])
-            { scale[0] -= 0.1f; }
+            { scale.X() -= 0.1f; }
             if(keys[SDL_SCANCODE_W])
-            { scale[1] += 0.1f; }
+            { scale.Y() += 0.1f; }
             if(keys[SDL_SCANCODE_S])
-            { scale[1] -= 0.1f; }
+            { scale.Y() -= 0.1f; }
 
             u.Translate(translate.ClampMagnitude(0, 1));
-            u.SetScale(scale);
+            u.Rotate(Quaternion(rotate));
+            u.Scale = scale;
 
             material.SetProperty("perspectiveMatrix", pspMatrix);
-            material.SetProperty("localToCameraMatrix", u.TRSMatrix);
+            material.SetProperty("localToCameraMatrix", u.GetTRSMatrix());
             egler.Window().DrawModel(model, material);
         }
     }

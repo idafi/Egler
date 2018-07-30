@@ -6,16 +6,16 @@ namespace Egler
 {
     struct Unit
     {
+        Vector3 Position;
+        Quaternion Rotation;
+        Vector3 Scale;
+
         ModelSystem::Ptr Model;
         MaterialSystem::Ptr Material;
-        Mat4 TRSMatrix;
-
-        Vector3 GetPosition();
-        void SetPosition(const Vector3& position);
-
-        Vector3 GetScale();
-        void SetScale(const Vector3& scale);
 
         void Translate(const Vector3& translation);
+        void Rotate(const Quaternion& rotation);
+
+        Mat4 GetTRSMatrix() const;
     };
 }
