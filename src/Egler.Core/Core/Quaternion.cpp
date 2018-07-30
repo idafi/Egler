@@ -61,6 +61,11 @@ namespace Egler::Core
         *this = *this * other;
     }
 
+    Quaternion Quaternion::Identity()
+    {
+        return Quaternion(0, 0, 0, 1);
+    }
+
     float Quaternion::X() const
     {
         return c[0];

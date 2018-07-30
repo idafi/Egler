@@ -17,6 +17,8 @@ namespace Egler::Core
             Quaternion operator *(const Quaternion& other) const;
             void operator *=(const Quaternion& other);
 
+            static Quaternion Identity();
+
             float X() const;
             float Y() const;
             float Z() const;
