@@ -9,7 +9,6 @@ if [ $? -ne 0 ]; then
     exit
 fi
 
-echo "...done."
 echo "building Egler.Test..."
 
 clang++ \
@@ -19,9 +18,9 @@ clang++ \
     -std=c++17 \
     -Wall \
     -o"bin/Egler.Test.exe" \
+    -L"bin" -lEgler.Core \
     `ls ../src/Egler.Test/**/*.cpp` \
-    -lgtest_main -lgtest -lgmock \
-    -L"bin" -lEgler.Core
+    -lgtest_main -lgtest -lgmock
 
 if [ $? -ne 0 ]; then
     exit
