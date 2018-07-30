@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Egler.Core/Video/Video.hpp"
+#include "Egler.hpp"
 
 namespace Egler
 {
