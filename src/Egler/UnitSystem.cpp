@@ -35,6 +35,39 @@ namespace Egler
 
         const byte * const keys = SDL_GetKeyboardState(nullptr);
 
+        Vector3 translate;
+        if(keys[SDL_SCANCODE_RIGHT])
+        { translate.X() += 0.1f; }
+        if(keys[SDL_SCANCODE_LEFT])
+        { translate.X() -= 0.1f; }
+        if(keys[SDL_SCANCODE_UP])
+        { translate.Y() += 0.1f; }
+        if(keys[SDL_SCANCODE_DOWN])
+        { translate.Y() -= 0.1f; }
+
+        Vector3 rotate;
+        if(keys[SDL_SCANCODE_E])
+        { rotate.X() += 1; }
+        if(keys[SDL_SCANCODE_Q])
+        { rotate.X() -= 1; }
+        if(keys[SDL_SCANCODE_T])
+        { rotate.Y() += 1; }
+        if(keys[SDL_SCANCODE_G])
+        { rotate.Y() -= 1; }
+
+        Vector3 scale;
+        if(keys[SDL_SCANCODE_D])
+        { scale.X() += 0.1f; }
+        if(keys[SDL_SCANCODE_A])
+        { scale.X() -= 0.1f; }
+        if(keys[SDL_SCANCODE_W])
+        { scale.Y() += 0.1f; }
+        if(keys[SDL_SCANCODE_S])
+        { scale.Y() -= 0.1f; }
+
+        uint ticks = SDL_GetTicks();
+        float t = (float)(ticks % 5000) / 5000;
+
         for(int i = 0; i < pool.Capacity(); i++)
         {
             if(!pool.IsAllocated(i))
@@ -44,42 +77,9 @@ namespace Egler
             Model& model = egler.Models().Get(u.Model);
             Material& material = egler.Materials().Get(u.Material);
 
-            Vector3 translate;
-            if(keys[SDL_SCANCODE_RIGHT])
-            { translate.X() += 0.1f; }
-            if(keys[SDL_SCANCODE_LEFT])
-            { translate.X() -= 0.1f; }
-            if(keys[SDL_SCANCODE_UP])
-            { translate.Y() += 0.1f; }
-            if(keys[SDL_SCANCODE_DOWN])
-            { translate.Y() -= 0.1f; }
-
-            Vector3 rotate;
-            if(keys[SDL_SCANCODE_E])
-            { rotate.X() += 1; }
-            if(keys[SDL_SCANCODE_Q])
-            { rotate.X() -= 1; }
-            if(keys[SDL_SCANCODE_T])
-            { rotate.Y() += 1; }
-            if(keys[SDL_SCANCODE_G])
-            { rotate.Y() -= 1; }
-
-            Vector3 scale = u.Scale;
-            if(keys[SDL_SCANCODE_D])
-            { scale.X() += 0.1f; }
-            if(keys[SDL_SCANCODE_A])
-            { scale.X() -= 0.1f; }
-            if(keys[SDL_SCANCODE_W])
-            { scale.Y() += 0.1f; }
-            if(keys[SDL_SCANCODE_S])
-            { scale.Y() -= 0.1f; }
-
             u.Translate(translate.ClampMagnitude(0, 1));
             u.Rotate(Quaternion(rotate));
-            u.Scale = scale;
-
-            uint ticks = SDL_GetTicks();
-            float t = (float)(ticks % 5000) / 5000;
+            u.Scale += scale;
             
             material.SetProperty("perspectiveMatrix", pspMatrix);
             material.SetProperty("localToCameraMatrix", u.GetTRSMatrix());
