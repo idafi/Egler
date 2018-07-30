@@ -78,8 +78,12 @@ namespace Egler
             u.Rotate(Quaternion(rotate));
             u.Scale = scale;
 
+            uint ticks = SDL_GetTicks();
+            float t = (float)(ticks % 5000) / 5000;
+            
             material.SetProperty("perspectiveMatrix", pspMatrix);
             material.SetProperty("localToCameraMatrix", u.GetTRSMatrix());
+            material.SetProperty("t", t);
             egler.Window().DrawModel(model, material);
         }
     }
