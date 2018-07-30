@@ -13,5 +13,10 @@ namespace Egler
         public:
             UnitPtr Create(EglerContext& egler, const ModelPtr& model, const MaterialPtr& material);
             void Update(EglerContext& egler);
+        
+        private:
+            Vector3 GetTranslation(const byte * const keys);
+            Quaternion GetRotation(const byte * const keys);
+            Vector3 GetScale(const byte * const keys);
     };
 }

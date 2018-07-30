@@ -33,7 +33,33 @@ namespace Egler
         float aspect = windowSize[0] / windowSize[1];
         Matrix pspMatrix = Mat4::Perspective(cameraFOV, zNear, zFar, aspect);
 
+        uint ticks = SDL_GetTicks();
+        float t = (float)(ticks % 5000) / 5000;
+
         const byte * const keys = SDL_GetKeyboardState(nullptr);
+        Vector3 translate = GetTranslation(keys);
+        Quaternion rotate = GetRotation(keys);
+        Vector3 scale = GetScale(keys);
+
+        for(Unit& u : pool)
+        {
+            Model& model = egler.Models().Get(u.Model);
+            Material& material = egler.Materials().Get(u.Material);
+
+            u.Translate(translate.ClampMagnitude(0, 1));
+            u.Rotate(rotate);
+            u.Scale += scale;
+            
+            material.SetProperty("perspectiveMatrix", pspMatrix);
+            material.SetProperty("localToCameraMatrix", u.GetTRSMatrix());
+            material.SetProperty("t", t);
+            egler.Window().DrawModel(model, material);
+        }
+    }
+
+    Vector3 UnitSystem::GetTranslation(const byte * const keys)
+    {
+        CheckPtr(keys);
 
         Vector3 translate;
         if(keys[SDL_SCANCODE_RIGHT])
@@ -45,6 +71,13 @@ namespace Egler
         if(keys[SDL_SCANCODE_DOWN])
         { translate.Y() -= 0.1f; }
 
+        return translate;
+    }
+
+    Quaternion UnitSystem::GetRotation(const byte * const keys)
+    {
+        CheckPtr(keys);
+
         Vector3 rotate;
         if(keys[SDL_SCANCODE_E])
         { rotate.X() += 1; }
@@ -54,6 +87,13 @@ namespace Egler
         { rotate.Y() += 1; }
         if(keys[SDL_SCANCODE_G])
         { rotate.Y() -= 1; }
+
+        return Quaternion(rotate);
+    }
+
+    Vector3 UnitSystem::GetScale(const byte * const keys)
+    {
+        CheckPtr(keys);
 
         Vector3 scale;
         if(keys[SDL_SCANCODE_D])
@@ -65,22 +105,6 @@ namespace Egler
         if(keys[SDL_SCANCODE_S])
         { scale.Y() -= 0.1f; }
 
-        uint ticks = SDL_GetTicks();
-        float t = (float)(ticks % 5000) / 5000;
-
-        for(Unit& u : pool)
-        {
-            Model& model = egler.Models().Get(u.Model);
-            Material& material = egler.Materials().Get(u.Material);
-
-            u.Translate(translate.ClampMagnitude(0, 1));
-            u.Rotate(Quaternion(rotate));
-            u.Scale += scale;
-            
-            material.SetProperty("perspectiveMatrix", pspMatrix);
-            material.SetProperty("localToCameraMatrix", u.GetTRSMatrix());
-            material.SetProperty("t", t);
-            egler.Window().DrawModel(model, material);
-        }
+        return scale;
     }
 }
