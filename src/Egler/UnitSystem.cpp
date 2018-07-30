@@ -68,12 +68,8 @@ namespace Egler
         uint ticks = SDL_GetTicks();
         float t = (float)(ticks % 5000) / 5000;
 
-        for(int i = 0; i < pool.Capacity(); i++)
+        for(Unit& u : pool)
         {
-            if(!pool.IsAllocated(i))
-            { continue; }
-
-            Unit& u = pool[i];
             Model& model = egler.Models().Get(u.Model);
             Material& material = egler.Materials().Get(u.Material);
 
