@@ -184,4 +184,34 @@ namespace Egler::Core
         ASSERT_FLOAT_EQ(0, c[1]);
         ASSERT_FLOAT_EQ(1, c[2]);
     }
+
+    TEST_F(VectorTest, TestComponentGet)
+    {
+        const Vector4 v(1, 2, 3, 4);
+        
+        float x = v.X();
+        float y = v.Y();
+        float z = v.Z();
+        float w = v.W();
+
+        ASSERT_FLOAT_EQ(1, x);
+        ASSERT_FLOAT_EQ(2, y);
+        ASSERT_FLOAT_EQ(3, z);
+        ASSERT_FLOAT_EQ(4, w);
+    }
+
+    TEST_F(VectorTest, TestComponentSet)
+    {
+        Vector4 v(1, 2, 3, 4);
+
+        v.X() = 5;
+        v.Y() = 6;
+        v.Z() = 7;
+        v.W() = 8;
+
+        ASSERT_FLOAT_EQ(5, v.X());
+        ASSERT_FLOAT_EQ(6, v.Y());
+        ASSERT_FLOAT_EQ(7, v.Z());
+        ASSERT_FLOAT_EQ(8, v.W());
+    }
 }

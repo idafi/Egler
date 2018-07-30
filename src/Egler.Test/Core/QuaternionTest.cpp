@@ -71,4 +71,34 @@ namespace Egler::Core
         ASSERT_NEAR(60, euler[1], 0.0001f);
         ASSERT_NEAR(90, euler[2], 0.0001f);
     }
+
+    TEST_F(QuaternionTest, TestComponentGet)
+    {
+        const Quaternion q(1, 2, 3, 4);
+        
+        float x = q.X();
+        float y = q.Y();
+        float z = q.Z();
+        float w = q.W();
+
+        ASSERT_FLOAT_EQ(1, x);
+        ASSERT_FLOAT_EQ(2, y);
+        ASSERT_FLOAT_EQ(3, z);
+        ASSERT_FLOAT_EQ(4, w);
+    }
+
+    TEST_F(QuaternionTest, TestComponentSet)
+    {
+        Quaternion q(1, 2, 3, 4);
+
+        q.X() = 5;
+        q.Y() = 6;
+        q.Z() = 7;
+        q.W() = 8;
+
+        ASSERT_FLOAT_EQ(5, q.X());
+        ASSERT_FLOAT_EQ(6, q.Y());
+        ASSERT_FLOAT_EQ(7, q.Z());
+        ASSERT_FLOAT_EQ(8, q.W());
+    }
 }

@@ -119,6 +119,26 @@ namespace Egler::Core
 				(*this)[0] = (float)(cos(rad));
 				(*this)[1] = (float)(sin(rad));
 			}
+
+			float X() const
+			{
+				return (*this)[0];
+			}
+
+			float Y() const
+			{
+				return (*this)[1];
+			}
+
+			float& X()
+			{
+				return (*this)[0];
+			}
+
+			float& Y()
+			{
+				return (*this)[1];
+			}
 			
 			float ToAngle() const
 			{
@@ -144,6 +164,36 @@ namespace Egler::Core
 				(*this)[2] = z;
 			}
 
+			float X() const
+			{
+				return (*this)[0];
+			}
+
+			float Y() const
+			{
+				return (*this)[1];
+			}
+
+			float Z() const
+			{
+				return (*this)[2];
+			}
+
+			float& X()
+			{
+				return (*this)[0];
+			}
+
+			float& Y()
+			{
+				return (*this)[1];
+			}
+
+			float& Z()
+			{
+				return (*this)[2];
+			}
+
 			Vector3 Cross(Vector3 v) const
 			{
 				float x = ((*this)[1] * v[2]) - ((*this)[2] * v[1]);
@@ -160,6 +210,46 @@ namespace Egler::Core
 			Vector4() : Vector<4>() { }
 			Vector4(const Vector<4>& v) : Vector<4>(v) { }
 			Vector4(const Matrix<1, 4>& m) : Vector<4>(m) { }
+
+			float X() const
+			{
+				return (*this)[0];
+			}
+
+			float Y() const
+			{
+				return (*this)[1];
+			}
+
+			float Z() const
+			{
+				return (*this)[2];
+			}
+
+			float W() const
+			{
+				return (*this)[3];
+			}
+
+			float& X()
+			{
+				return (*this)[0];
+			}
+
+			float& Y()
+			{
+				return (*this)[1];
+			}
+
+			float& Z()
+			{
+				return (*this)[2];
+			}
+
+			float& W()
+			{
+				return (*this)[3];
+			}
 			
 			Vector4(float x, float y, float z, float w)
 			{

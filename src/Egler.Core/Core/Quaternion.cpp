@@ -61,6 +61,46 @@ namespace Egler::Core
         *this = *this * other;
     }
 
+    float Quaternion::X() const
+    {
+        return c[0];
+    }
+
+    float Quaternion::Y() const
+    {
+        return c[1];
+    }
+
+    float Quaternion::Z() const
+    {
+        return c[2];
+    }
+
+    float Quaternion::W() const
+    {
+        return c[3];
+    }
+
+    float& Quaternion::X()
+    {
+        return c[0];
+    }
+
+    float& Quaternion::Y()
+    {
+        return c[1];
+    }
+
+    float& Quaternion::Z()
+    {
+        return c[2];
+    }
+
+    float& Quaternion::W()
+    {
+        return c[3];
+    }
+
     Vector3 Quaternion::ToEuler() const
     {
         float sy = 2 * (c[3] * c[2] + c[0] * c[1]);

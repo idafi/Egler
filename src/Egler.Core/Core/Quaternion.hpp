@@ -17,6 +17,16 @@ namespace Egler::Core
             Quaternion operator *(const Quaternion& other) const;
             void operator *=(const Quaternion& other);
 
+            float X() const;
+            float Y() const;
+            float Z() const;
+            float W() const;
+            
+            float& X();
+            float& Y();
+            float& Z();
+            float& W();
+
             Vector3 ToEuler() const;
 
         private:
