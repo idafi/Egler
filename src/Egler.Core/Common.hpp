@@ -31,6 +31,8 @@ namespace Egler
 #define Max(a, b) (((a) > (b)) ? (a) : (b))
 #define Clamp(value, lower, upper) (Min(Max((value), (lower)), (upper)))
 #define RandF() ((float)(rand()) / (float)(RAND_MAX))
+#define Deg2Rad(degrees) ((degrees) * ((M_PI) / 180))
+#define Rad2Deg(radians) ((radians) * (180.0 / (M_PI)))
 
 #define FlagSet(mask, flag) ((mask) |= (flag))
 #define FlagClear(mask, flag) ((mask) &= ~(flag))
